@@ -85,10 +85,8 @@ footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-s
 <div class="field"><label>Email Address</label><input id="email" type="email" required placeholder="your@email.com"></div>
 <div class="field"><label>Country</label><select id="country" required><option value="">Select country</option><option>Canada</option><option>Australia</option></select></div>
 <div class="field"><label>Visa Type</label><select id="visa" required><option value="">Select visa type</option><option>Work Visa</option><option>Student Visa</option><option>Visitor Visa</option><option>Tourist Visa</option></select></div>
-<div class="field"><label>Passport Issue Year</label><select id="issueYear" required></select></div>
-<div class="field"><label>Passport Expiry Year</label><select id="expiryYear" required></select></div>
-<div class="field"><label>Passport Issue Date</label><input id="issueDate" type="date" required></div>
-<div class="field"><label>Passport Expiry Date</label><input id="expiryDate" type="date" required></div>
+<div class="field"><label>Passport Issue Date</label><input id="issueDate" type="date" min="1950-01-01" max="2040-12-31" required></div>
+<div class="field"><label>Passport Expiry Date</label><input id="expiryDate" type="date" min="1950-01-01" max="2040-12-31" required></div>
 <div class="field full"><label>Current Address</label><input id="address" required placeholder="Your current address"></div>
 <div class="field full"><label>Your Message</label><textarea id="message" placeholder="Tell us briefly about your application"></textarea></div>
 <div class="field full"><button class="btn gold" type="submit">Send Application on WhatsApp →</button></div>
@@ -96,11 +94,9 @@ footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-s
 
 <footer><div class="container footer"><div>© 2026 <b>Canada & Australia</b>. All rights reserved.</div><div>Visa Application & Assistance</div></div></footer>
 <script>
-const issueYear=document.getElementById('issueYear'),expiryYear=document.getElementById('expiryYear'),currentYear=new Date().getFullYear();
-for(let y=2040;y>=1950;y--){issueYear.add(new Option(y,y));expiryYear.add(new Option(y,y));}
 function setVisa(country,visa){document.getElementById('country').value=country;document.getElementById('visa').value=visa;document.getElementById('apply').scrollIntoView({behavior:'smooth'});}
 function sendWhatsApp(e){e.preventDefault();const v=id=>document.getElementById(id).value;
-const text=`New Visa Application%0A%0AFirst Name: ${encodeURIComponent(v('firstName'))}%0ALast Name: ${encodeURIComponent(v('lastName'))}%0APassport Number: ${encodeURIComponent(v('passport'))}%0ANationality: ${encodeURIComponent(v('nationality'))}%0ADate of Birth: ${encodeURIComponent(v('dob'))}%0APhone / WhatsApp: ${encodeURIComponent(v('phone'))}%0AEmail: ${encodeURIComponent(v('email'))}%0ACountry: ${encodeURIComponent(v('country'))}%0AVisa Type: ${encodeURIComponent(v('visa'))}%0APassport Issue Year: ${encodeURIComponent(v('issueYear'))}%0APassport Issue Date: ${encodeURIComponent(v('issueDate'))}%0APassport Expiry Year: ${encodeURIComponent(v('expiryYear'))}%0APassport Expiry Date: ${encodeURIComponent(v('expiryDate'))}%0ACurrent Address: ${encodeURIComponent(v('address'))}%0AMessage: ${encodeURIComponent(v('message'))}`;
+const text=`New Visa Application%0A%0AFirst Name: ${encodeURIComponent(v('firstName'))}%0ALast Name: ${encodeURIComponent(v('lastName'))}%0APassport Number: ${encodeURIComponent(v('passport'))}%0ANationality: ${encodeURIComponent(v('nationality'))}%0ADate of Birth: ${encodeURIComponent(v('dob'))}%0APhone / WhatsApp: ${encodeURIComponent(v('phone'))}%0AEmail: ${encodeURIComponent(v('email'))}%0ACountry: ${encodeURIComponent(v('country'))}%0AVisa Type: ${encodeURIComponent(v('visa'))}%0APassport Issue Date: ${encodeURIComponent(v('issueDate'))}%0APassport Expiry Date: ${encodeURIComponent(v('expiryDate'))}%0ACurrent Address: ${encodeURIComponent(v('address'))}%0AMessage: ${encodeURIComponent(v('message'))}`;
 window.open('https://wa.me/12494771916?text='+text,'_blank');}
 </script>
 </body>

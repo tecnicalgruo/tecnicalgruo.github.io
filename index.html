@@ -177,10 +177,18 @@ footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-s
  </div>
  <div class="form">
   <form onsubmit="sendWhatsApp(event)">
-   <div class="field"><label>Full Name</label><input id="name" required placeholder="Your full name"></div>
+   <div class="field"><label>First Name</label><input id="firstName" required placeholder="First name"></div>
+   <div class="field"><label>Last Name</label><input id="lastName" required placeholder="Last name"></div>
+   <div class="field"><label>Passport Number</label><input id="passport" required placeholder="Passport number"></div>
+   <div class="field"><label>Nationality</label><input id="nationality" required placeholder="Nationality"></div>
+   <div class="field"><label>Date of Birth</label><input id="dob" type="date" required></div>
    <div class="field"><label>Phone / WhatsApp</label><input id="phone" required placeholder="Your number"></div>
+   <div class="field"><label>Email Address</label><input id="email" type="email" required placeholder="your@email.com"></div>
    <div class="field"><label>Country</label><select id="country" required><option value="">Select country</option><option>Canada</option><option>Australia</option></select></div>
    <div class="field"><label>Visa Type</label><select id="visa" required><option value="">Select visa type</option><option>Work Visa</option><option>Student Visa</option><option>Visitor Visa</option><option>Tourist Visa</option></select></div>
+   <div class="field"><label>Passport Issue Date</label><input id="issueDate" type="date" required></div>
+   <div class="field"><label>Passport Expiry Date</label><input id="expiryDate" type="date" required></div>
+   <div class="field full"><label>Current Address</label><input id="address" required placeholder="Your current address"></div>
    <div class="field full"><label>Your Message</label><textarea id="message" placeholder="Tell us briefly about your application"></textarea></div>
    <div class="field full"><button class="btn gold" type="submit">Send Application on WhatsApp →</button></div>
   </form>
@@ -205,12 +213,20 @@ function setVisa(value){
 }
 function sendWhatsApp(e){
  e.preventDefault();
- const name=document.getElementById('name').value;
+ const firstName=document.getElementById('firstName').value;
+ const lastName=document.getElementById('lastName').value;
+ const passport=document.getElementById('passport').value;
+ const nationality=document.getElementById('nationality').value;
+ const dob=document.getElementById('dob').value;
  const phone=document.getElementById('phone').value;
+ const email=document.getElementById('email').value;
  const country=document.getElementById('country').value;
  const visa=document.getElementById('visa').value;
+ const issueDate=document.getElementById('issueDate').value;
+ const expiryDate=document.getElementById('expiryDate').value;
+ const address=document.getElementById('address').value;
  const message=document.getElementById('message').value;
- const text=`New Visa Application%0A%0AName: ${encodeURIComponent(name)}%0APhone: ${encodeURIComponent(phone)}%0ACountry: ${encodeURIComponent(country)}%0AVisa Type: ${encodeURIComponent(visa)}%0AMessage: ${encodeURIComponent(message)}`;
+ const text=`New Visa Application%0A%0AFirst Name: ${encodeURIComponent(firstName)}%0ALast Name: ${encodeURIComponent(lastName)}%0APassport Number: ${encodeURIComponent(passport)}%0ANationality: ${encodeURIComponent(nationality)}%0ADate of Birth: ${encodeURIComponent(dob)}%0APhone / WhatsApp: ${encodeURIComponent(phone)}%0AEmail: ${encodeURIComponent(email)}%0ACountry: ${encodeURIComponent(country)}%0AVisa Type: ${encodeURIComponent(visa)}%0APassport Issue Date: ${encodeURIComponent(issueDate)}%0APassport Expiry Date: ${encodeURIComponent(expiryDate)}%0ACurrent Address: ${encodeURIComponent(address)}%0AMessage: ${encodeURIComponent(message)}`;
  window.open('https://wa.me/12494771916?text='+text,'_blank');
 }
 </script>

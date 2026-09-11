@@ -161,7 +161,12 @@ body::after{
 </form></div></div></div></section>
 
 <footer><div class="container footer"><div>© 2026 <b>Canada & Australia</b>. All rights reserved.</div><div>Visa Application & Assistance</div></div></footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
+const SUPABASE_URL = 'https://enzdwufnufalmeimnccn.supabase.co';
+const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_qhjQqU0JgOGpcR4Qq3QVog_be3Ydhnu';
+const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+
 const issueYear=document.getElementById('issueYear'),expiryYear=document.getElementById('expiryYear');
 const dobYear=document.getElementById('dobYear'),dobDay=document.getElementById('dobDay');
 for(let d=1;d<=31;d++){let n=String(d).padStart(2,'0');dobDay.add(new Option(n,n));}
@@ -169,10 +174,51 @@ for(let y=2040;y>=1950;y--){dobYear.add(new Option(y,y));}
 const issueDay=document.getElementById('issueDay'),expiryDay=document.getElementById('expiryDay');
 for(let d=1;d<=31;d++){let n=String(d).padStart(2,'0');issueDay.add(new Option(n,n));expiryDay.add(new Option(n,n));}
 for(let y=2040;y>=1950;y--){issueYear.add(new Option(y,y));expiryYear.add(new Option(y,y));}
-function setVisa(country,visa){document.getElementById('country').value=country;document.getElementById('visa').value=visa;document.getElementById('apply').scrollIntoView({behavior:'smooth'});}
-function sendWhatsApp(e){e.preventDefault();const v=id=>document.getElementById(id).value;
-const text=`New Visa Application%0A%0AFirst Name: ${encodeURIComponent(v('firstName'))}%0ALast Name: ${encodeURIComponent(v('lastName'))}%0APassport Number: ${encodeURIComponent(v('passport'))}%0ANationality: ${encodeURIComponent(v('nationality'))}%0ADate of Birth: ${encodeURIComponent(v('dobDay')+' '+v('dobMonth')+' '+v('dobYear'))}%0APhone / WhatsApp: ${encodeURIComponent(v('phone'))}%0AEmail: ${encodeURIComponent(v('email'))}%0ACountry: ${encodeURIComponent(v('country'))}%0AVisa Type: ${encodeURIComponent(v('visa'))}%0APassport Issue Date: ${encodeURIComponent(v('issueDay')+' '+v('issueMonth')+' '+v('issueYear'))}%0APassport Expiry Date: ${encodeURIComponent(v('expiryDay')+' '+v('expiryMonth')+' '+v('expiryYear'))}%0ACurrent Address: ${encodeURIComponent(v('address'))}%0AMessage: ${encodeURIComponent(v('message'))}`;
-window.open('https://wa.me/12494771916?text='+text,'_blank');}
+
+function setVisa(country,visa){
+  document.getElementById('country').value=country;
+  document.getElementById('visa').value=visa;
+  document.getElementById('apply').scrollIntoView({behavior:'smooth'});
+}
+
+async function sendWhatsApp(e){
+  e.preventDefault();
+  const v=id=>document.getElementById(id).value;
+  const dob = v('dobDay')+' '+v('dobMonth')+' '+v('dobYear');
+  const issueDate = v('issueDay')+' '+v('issueMonth')+' '+v('issueYear');
+  const expiryDate = v('expiryDay')+' '+v('expiryMonth')+' '+v('expiryYear');
+
+  const application = {
+    first_name: v('firstName'),
+    last_name: v('lastName'),
+    passport_number: v('passport'),
+    nationality: v('nationality'),
+    date_of_birth: dob,
+    phone: v('phone'),
+    email: v('email'),
+    country: v('country'),
+    visa_type: v('visa'),
+    passport_issue_date: issueDate,
+    passport_expiry_date: expiryDate,
+    current_address: v('address'),
+    message: v('message'),
+    status: 'New'
+  };
+
+  const { error } = await supabaseClient
+    .from('visa_applications')
+    .insert([application]);
+
+  if(error){
+    console.error('Supabase error:', error);
+    alert('Application could not be saved. Please try again.');
+    return;
+  }
+
+  const text=`New Visa Application%0A%0AFirst Name: ${encodeURIComponent(v('firstName'))}%0ALast Name: ${encodeURIComponent(v('lastName'))}%0APassport Number: ${encodeURIComponent(v('passport'))}%0ANationality: ${encodeURIComponent(v('nationality'))}%0ADate of Birth: ${encodeURIComponent(dob)}%0APhone / WhatsApp: ${encodeURIComponent(v('phone'))}%0AEmail: ${encodeURIComponent(v('email'))}%0ACountry: ${encodeURIComponent(v('country'))}%0AVisa Type: ${encodeURIComponent(v('visa'))}%0APassport Issue Date: ${encodeURIComponent(issueDate)}%0APassport Expiry Date: ${encodeURIComponent(expiryDate)}%0ACurrent Address: ${encodeURIComponent(v('address'))}%0AMessage: ${encodeURIComponent(v('message'))}`;
+
+  window.open('https://wa.me/12494771916?text='+text,'_blank');
+}
 </script>
 </body>
 </html>

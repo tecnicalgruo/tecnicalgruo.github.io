@@ -4,231 +4,104 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Canada & Australia | Visa Application & Assistance</title>
-<meta name="description" content="Canada & Australia visa application and assistance services. Work, Student, Visitor and Tourist visa categories.">
 <style>
-:root{
-  --navy:#07152d;--navy2:#0b2042;--blue:#1d5cff;--gold:#f4c95d;
-  --white:#fff;--muted:#aebbd0;--line:rgba(255,255,255,.10);
-  --card:rgba(255,255,255,.055);
-}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:Inter,Arial,sans-serif;background:var(--navy);color:var(--white);line-height:1.6}
-a{text-decoration:none;color:inherit}
-.container{width:min(1160px,92%);margin:auto}
-header{position:sticky;top:0;z-index:50;background:rgba(7,21,45,.90);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
-.nav{height:76px;display:flex;align-items:center;justify-content:space-between}
-.logo{font-size:22px;font-weight:900;letter-spacing:.4px}
-.logo span{color:var(--gold)}
-nav{display:flex;gap:26px}
-nav a{color:#d8e1ef;font-size:14px;font-weight:700}
-nav a:hover{color:var(--gold)}
-.btn{display:inline-flex;align-items:center;justify-content:center;padding:13px 20px;border-radius:12px;background:var(--blue);font-weight:800;border:1px solid rgba(255,255,255,.1);transition:.2s}
-.btn:hover{transform:translateY(-2px);filter:brightness(1.1)}
-.btn.gold{background:var(--gold);color:#08162d}
-.hero{padding:95px 0 75px;overflow:hidden;position:relative}
-.hero:before{content:"";position:absolute;width:520px;height:520px;border-radius:50%;background:#154fc5;filter:blur(120px);opacity:.22;right:-180px;top:-150px}
-.hero-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:55px;align-items:center}
-.badge{display:inline-flex;padding:8px 13px;border:1px solid rgba(244,201,93,.35);border-radius:30px;color:var(--gold);font-size:13px;font-weight:800;background:rgba(244,201,93,.06);margin-bottom:20px}
-h1{font-size:clamp(44px,6vw,74px);line-height:1.02;letter-spacing:-2px;margin-bottom:20px}
-h1 span{color:var(--gold)}
-.hero p{font-size:18px;color:var(--muted);max-width:650px;margin-bottom:30px}
-.actions{display:flex;gap:13px;flex-wrap:wrap}
-.hero-card{min-height:390px;border:1px solid var(--line);border-radius:30px;background:linear-gradient(145deg,#0e2a56,#08152c);padding:30px;display:flex;align-items:center;justify-content:center;box-shadow:0 25px 80px rgba(0,0,0,.3)}
-.passport{width:255px;height:315px;border-radius:18px;background:linear-gradient(145deg,#123e82,#092452);border:1px solid rgba(255,255,255,.2);padding:25px;box-shadow:0 30px 60px rgba(0,0,0,.35);transform:rotate(-5deg)}
-.passport .top{font-size:12px;letter-spacing:3px;color:#d9e6ff;text-align:center}
-.passport .mark{width:88px;height:88px;border:2px solid var(--gold);border-radius:50%;margin:45px auto 28px;display:grid;place-items:center;font-size:36px}
-.passport .chip{width:45px;height:34px;border:1px solid var(--gold);border-radius:7px;margin-bottom:22px}
-.passport .lines{height:5px;background:rgba(255,255,255,.2);margin:8px 0;border-radius:5px}
-section{padding:85px 0}
-.section-head{text-align:center;max-width:700px;margin:0 auto 45px}
-.eyebrow{color:var(--gold);font-weight:900;font-size:13px;text-transform:uppercase;letter-spacing:2px}
-h2{font-size:42px;line-height:1.1;margin:9px 0 13px}
-.section-head p{color:var(--muted)}
-.country{border:1px solid var(--line);border-radius:25px;padding:28px;background:rgba(255,255,255,.025);margin-bottom:25px}
-.country-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:23px}
-.country-title{font-size:28px;font-weight:900}
-.country-title small{display:block;color:var(--muted);font-size:13px;font-weight:500;margin-top:2px}
-.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;min-height:180px;transition:.25s}
-.card:hover{transform:translateY(-5px);border-color:rgba(244,201,93,.4);background:rgba(255,255,255,.08)}
-.icon{font-size:31px;margin-bottom:14px}
-.card h3{font-size:18px;margin-bottom:6px}
-.card p{font-size:13px;color:var(--muted);margin-bottom:14px}
-.card a{font-size:13px;color:var(--gold);font-weight:800}
-.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-.step{padding:25px;border:1px solid var(--line);border-radius:18px;background:var(--card)}
-.num{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:var(--gold);color:#07152d;font-weight:900;margin-bottom:17px}
-.form-wrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:30px;align-items:stretch}
-.info,.form{border:1px solid var(--line);background:var(--card);border-radius:24px;padding:30px}
-.info h3{font-size:28px;margin:10px 0}
-.info p{color:var(--muted);margin-bottom:25px}
-.contact{display:flex;gap:12px;align-items:center;padding:15px;border:1px solid var(--line);border-radius:14px;margin-top:10px}
-form{display:grid;grid-template-columns:1fr 1fr;gap:15px}
-.field{display:flex;flex-direction:column;gap:7px}
-.field.full{grid-column:1/-1}
-label{font-size:13px;font-weight:800;color:#dce5f4}
-input,select,textarea{width:100%;padding:13px 14px;background:#08152c;border:1px solid var(--line);border-radius:11px;color:white;outline:none}
-input:focus,select:focus,textarea:focus{border-color:var(--blue)}
-textarea{min-height:110px;resize:vertical}
-footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-size:13px}
-.footer{display:flex;justify-content:space-between;gap:20px}
-.notice{font-size:12px;color:#8494ad;max-width:800px;margin-top:10px}
-@media(max-width:900px){
- nav{display:none}.hero-grid,.form-wrap{grid-template-columns:1fr}.grid,.steps{grid-template-columns:repeat(2,1fr)}
-}
-@media(max-width:600px){
- .hero{padding-top:65px}section{padding:65px 0}h2{font-size:34px}
- .grid,.steps,form{grid-template-columns:1fr}.country{padding:18px}
- .country-head{align-items:flex-start;gap:15px;flex-direction:column}
- .footer{flex-direction:column}.hero-card{min-height:320px}
-}
+:root{--navy:#07152d;--blue:#1d5cff;--gold:#f4c95d;--white:#fff;--muted:#aebbd0;--line:rgba(255,255,255,.1);--card:rgba(255,255,255,.055)}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+body{font-family:Arial,Helvetica,sans-serif;background:var(--navy);color:#fff;line-height:1.6}
+a{text-decoration:none;color:inherit}.container{width:min(1160px,92%);margin:auto}
+header{position:sticky;top:0;z-index:20;background:rgba(7,21,45,.92);backdrop-filter:blur(15px);border-bottom:1px solid var(--line)}
+.nav{height:76px;display:flex;align-items:center;justify-content:space-between}.logo{font-size:22px;font-weight:900}.logo span{color:var(--gold)}
+nav{display:flex;gap:25px}nav a{font-size:14px;font-weight:700;color:#d8e1ef}nav a:hover{color:var(--gold)}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:13px 19px;border:0;border-radius:12px;background:var(--blue);color:#fff;font-weight:800;cursor:pointer}.btn.gold{background:var(--gold);color:#07152d}
+.hero{padding:90px 0 70px;position:relative;overflow:hidden}.hero:after{content:"";position:absolute;width:500px;height:500px;border-radius:50%;background:#1855d7;filter:blur(130px);opacity:.18;right:-180px;top:-170px}
+.hero-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:50px;align-items:center;position:relative;z-index:1}.badge{display:inline-block;padding:8px 13px;border:1px solid rgba(244,201,93,.35);border-radius:30px;color:var(--gold);font-size:12px;font-weight:900;letter-spacing:1px;margin-bottom:18px}
+h1{font-size:clamp(44px,6vw,74px);line-height:1.02;letter-spacing:-2px;margin-bottom:20px}h1 span{color:var(--gold)}
+.hero p{font-size:18px;color:var(--muted);max-width:650px;margin-bottom:28px}.actions{display:flex;gap:12px;flex-wrap:wrap}
+.hero-card{height:390px;border:1px solid var(--line);border-radius:28px;background:linear-gradient(145deg,#0e2a56,#08152c);display:grid;place-items:center}
+.passport{width:250px;height:310px;border-radius:18px;background:linear-gradient(145deg,#123e82,#092452);border:1px solid rgba(255,255,255,.2);padding:25px;transform:rotate(-5deg);box-shadow:0 25px 60px #0006}.passport .top{text-align:center;font-size:11px;letter-spacing:3px}.mark{width:85px;height:85px;border:2px solid var(--gold);border-radius:50%;display:grid;place-items:center;margin:45px auto 25px;font-size:35px}.chip{width:44px;height:32px;border:1px solid var(--gold);border-radius:7px}.line{height:5px;background:#ffffff33;border-radius:4px;margin-top:9px}
+section{padding:80px 0}.section-head{text-align:center;max-width:700px;margin:0 auto 42px}.eyebrow{color:var(--gold);font-size:12px;font-weight:900;letter-spacing:2px;text-transform:uppercase}h2{font-size:42px;line-height:1.1;margin:8px 0 12px}.section-head p{color:var(--muted)}
+.country{border:1px solid var(--line);border-radius:25px;padding:25px;background:#ffffff05;margin-bottom:24px}.country-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}.country-title{font-size:28px;font-weight:900}.country-title small{display:block;color:var(--muted);font-size:13px;font-weight:500}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}.card{border:1px solid var(--line);background:var(--card);border-radius:18px;overflow:hidden;transition:.25s}.card:hover{transform:translateY(-5px);border-color:#f4c95d66}.card img{width:100%;height:155px;object-fit:cover;display:block}.card-body{padding:17px}.card h3{font-size:18px;margin:5px 0}.card p{font-size:13px;color:var(--muted);margin-bottom:11px}.card a{font-size:13px;color:var(--gold);font-weight:900}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}.step{padding:24px;border:1px solid var(--line);border-radius:18px;background:var(--card)}.num{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:var(--gold);color:var(--navy);font-weight:900;margin-bottom:15px}
+.form-wrap{display:grid;grid-template-columns:.75fr 1.25fr;gap:25px}.info,.form{border:1px solid var(--line);background:var(--card);border-radius:24px;padding:28px}.info h3{font-size:28px;margin:9px 0}.info p{color:var(--muted);margin-bottom:20px}.contact{padding:14px;border:1px solid var(--line);border-radius:13px;margin:9px 0}
+form{display:grid;grid-template-columns:1fr 1fr;gap:14px}.field{display:flex;flex-direction:column;gap:6px}.full{grid-column:1/-1}label{font-size:12px;font-weight:800;color:#dce5f4}
+input,select,textarea{width:100%;padding:13px 14px;border:1px solid var(--line);border-radius:10px;background:#08152c;color:#fff;outline:none}input:focus,select:focus,textarea:focus{border-color:var(--blue)}textarea{min-height:105px;resize:vertical}
+.notice{font-size:12px!important;color:#8494ad!important;margin-top:18px!important}
+footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-size:13px}.footer{display:flex;justify-content:space-between}
+@media(max-width:900px){nav{display:none}.hero-grid,.form-wrap{grid-template-columns:1fr}.grid,.steps{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.hero{padding-top:60px}section{padding:60px 0}h2{font-size:34px}.grid,.steps,form{grid-template-columns:1fr}.country{padding:17px}.country-head{flex-direction:column;align-items:flex-start;gap:12px}.footer{flex-direction:column;gap:8px}}
 </style>
 </head>
 <body>
-<header>
-  <div class="container nav">
-    <a class="logo" href="#">CANADA <span>&</span> AUSTRALIA</a>
-    <nav>
-      <a href="#visas">Visa Services</a>
-      <a href="#process">Process</a>
-      <a href="#apply">Apply Now</a>
-    </nav>
-    <a class="btn" href="#apply">Start Application</a>
-  </div>
-</header>
+<header><div class="container nav">
+<a class="logo" href="#">CANADA <span>&</span> AUSTRALIA</a>
+<nav><a href="#visas">Visa Services</a><a href="#process">Process</a><a href="#apply">Apply Now</a></nav>
+<a class="btn" href="#apply">Start Application</a>
+</div></header>
 
-<main>
-<section class="hero">
-<div class="container hero-grid">
-<div>
-  <div class="badge">CANADA & AUSTRALIA VISA SERVICES</div>
-  <h1>Your journey.<br><span>Our assistance.</span></h1>
-  <p>Professional visa application assistance for Canada and Australia. Explore Work, Student, Visitor and Tourist visa categories and submit your application details online.</p>
-  <div class="actions">
-    <a class="btn gold" href="#apply">Apply Now →</a>
-    <a class="btn" href="#visas">Explore Visa Types</a>
-  </div>
-</div>
-<div class="hero-card">
-  <div class="passport">
-    <div class="top">TRAVEL DOCUMENT</div>
-    <div class="mark">✦</div>
-    <div class="chip"></div>
-    <div class="lines"></div><div class="lines" style="width:70%"></div>
-  </div>
-</div>
-</div>
-</section>
+<section class="hero"><div class="container hero-grid">
+<div><div class="badge">CANADA & AUSTRALIA VISA SERVICES</div><h1>Your journey.<br><span>Our assistance.</span></h1>
+<p>Professional visa application assistance for Canada and Australia. Choose your visa category and submit your basic application details online.</p>
+<div class="actions"><a class="btn gold" href="#apply">Apply Now →</a><a class="btn" href="#visas">Explore Visa Types</a></div></div>
+<div class="hero-card"><div class="passport"><div class="top">TRAVEL DOCUMENT</div><div class="mark">✦</div><div class="chip"></div><div class="line"></div><div class="line" style="width:70%"></div></div></div>
+</div></section>
 
-<section id="visas">
-<div class="container">
-<div class="section-head">
- <div class="eyebrow">Visa categories</div>
- <h2>Choose your destination</h2>
- <p>Clear visa categories for your Canada or Australia travel and application needs.</p>
-</div>
+<section id="visas"><div class="container">
+<div class="section-head"><div class="eyebrow">Visa categories</div><h2>Choose your destination</h2><p>Your four selected images are displayed as premium visa service cards.</p></div>
 
-<div class="country">
- <div class="country-head"><div class="country-title">🇨🇦 Canada <small>Explore Canada visa categories</small></div><span class="badge">4 SERVICES</span></div>
- <div class="grid">
-  <div class="card"><div class="icon">💼</div><h3>Work Visa</h3><p>For eligible employment and work opportunities.</p><a href="#apply" onclick="setVisa('Canada - Work Visa')">Apply →</a></div>
-  <div class="card"><div class="icon">🎓</div><h3>Student Visa</h3><p>For students planning to study in Canada.</p><a href="#apply" onclick="setVisa('Canada - Student Visa')">Apply →</a></div>
-  <div class="card"><div class="icon">🏛️</div><h3>Visitor Visa</h3><p>For visits, family meetings and short stays.</p><a href="#apply" onclick="setVisa('Canada - Visitor Visa')">Apply →</a></div>
-  <div class="card"><div class="icon">✈️</div><h3>Tourist Visa</h3><p>For holidays and tourism in Canada.</p><a href="#apply" onclick="setVisa('Canada - Tourist Visa')">Apply →</a></div>
- </div>
-</div>
+<div class="country"><div class="country-head"><div class="country-title">🇨🇦 Canada<small>Explore Canada visa categories</small></div><span class="badge">4 SERVICES</span></div>
+<div class="grid">
+<div class="card"><img src="01-work-visa(1).jpg" alt="Work Visa"><div class="card-body"><h3>💼 Work Visa</h3><p>Employment and work opportunities.</p><a href="#apply" onclick="setVisa('Canada','Work Visa')">Apply →</a></div></div>
+<div class="card"><img src="02-student-visa(1).jpg" alt="Student Visa"><div class="card-body"><h3>🎓 Student Visa</h3><p>Study plans and education.</p><a href="#apply" onclick="setVisa('Canada','Student Visa')">Apply →</a></div></div>
+<div class="card"><img src="03-visitor-visa(1).jpg" alt="Visitor Visa"><div class="card-body"><h3>🏛️ Visitor Visa</h3><p>Visits and short stays.</p><a href="#apply" onclick="setVisa('Canada','Visitor Visa')">Apply →</a></div></div>
+<div class="card"><img src="04-tourist-visa(1).jpg" alt="Tourist Visa"><div class="card-body"><h3>✈️ Tourist Visa</h3><p>Holidays and tourism.</p><a href="#apply" onclick="setVisa('Canada','Tourist Visa')">Apply →</a></div></div>
+</div></div>
 
-<div class="country">
- <div class="country-head"><div class="country-title">🇦🇺 Australia <small>Explore Australia visa categories</small></div><span class="badge">4 SERVICES</span></div>
- <div class="grid">
-  <div class="card"><div class="icon">💼</div><h3>Work Visa</h3><p>For eligible employment and work opportunities.</p><a href="#apply" onclick="setVisa('Australia - Work Visa')">Apply →</a></div>
-  <div class="card"><div class="icon">🎓</div><h3>Student Visa</h3><p>For students planning to study in Australia.</p><a href="#apply" onclick="setVisa('Australia - Student Visa')">Apply →</a></div>
-  <div class="card"><div class="icon">🏛️</div><h3>Visitor Visa</h3><p>For visits, family meetings and short stays.</p><a href="#apply" onclick="setVisa('Australia - Visitor Visa')">Apply →</a></div>
-  <div class="card"><div class="icon">✈️</div><h3>Tourist Visa</h3><p>For holidays and tourism in Australia.</p><a href="#apply" onclick="setVisa('Australia - Tourist Visa')">Apply →</a></div>
- </div>
-</div>
-</div>
-</section>
+<div class="country"><div class="country-head"><div class="country-title">🇦🇺 Australia<small>Explore Australia visa categories</small></div><span class="badge">4 SERVICES</span></div>
+<div class="grid">
+<div class="card"><img src="01-work-visa(1).jpg" alt="Work Visa"><div class="card-body"><h3>💼 Work Visa</h3><p>Employment and work opportunities.</p><a href="#apply" onclick="setVisa('Australia','Work Visa')">Apply →</a></div></div>
+<div class="card"><img src="02-student-visa(1).jpg" alt="Student Visa"><div class="card-body"><h3>🎓 Student Visa</h3><p>Study plans and education.</p><a href="#apply" onclick="setVisa('Australia','Student Visa')">Apply →</a></div></div>
+<div class="card"><img src="03-visitor-visa(1).jpg" alt="Visitor Visa"><div class="card-body"><h3>🏛️ Visitor Visa</h3><p>Visits and short stays.</p><a href="#apply" onclick="setVisa('Australia','Visitor Visa')">Apply →</a></div></div>
+<div class="card"><img src="04-tourist-visa(1).jpg" alt="Tourist Visa"><div class="card-body"><h3>✈️ Tourist Visa</h3><p>Holidays and tourism.</p><a href="#apply" onclick="setVisa('Australia','Tourist Visa')">Apply →</a></div></div>
+</div></div>
+</div></section>
 
-<section id="process">
-<div class="container">
-<div class="section-head"><div class="eyebrow">Simple process</div><h2>How it works</h2><p>A simple online intake process to get your visa application started.</p></div>
-<div class="steps">
- <div class="step"><div class="num">01</div><h3>Choose visa</h3><p>Pick your country and visa category.</p></div>
- <div class="step"><div class="num">02</div><h3>Submit details</h3><p>Complete the online application form.</p></div>
- <div class="step"><div class="num">03</div><h3>Review</h3><p>Our team can review the information you provide.</p></div>
- <div class="step"><div class="num">04</div><h3>Next steps</h3><p>Receive guidance about the next stage of your application.</p></div>
-</div>
-</div>
-</section>
+<section id="process"><div class="container"><div class="section-head"><div class="eyebrow">Simple process</div><h2>How it works</h2></div>
+<div class="steps"><div class="step"><div class="num">01</div><h3>Choose visa</h3><p>Choose country and category.</p></div><div class="step"><div class="num">02</div><h3>Submit details</h3><p>Complete the application form.</p></div><div class="step"><div class="num">03</div><h3>Review</h3><p>Check the information provided.</p></div><div class="step"><div class="num">04</div><h3>Next steps</h3><p>Get guidance for the next stage.</p></div></div></div></section>
 
-<section id="apply">
-<div class="container">
-<div class="section-head"><div class="eyebrow">Online application</div><h2>Start your application</h2><p>Send your basic details directly through WhatsApp for the next step.</p></div>
-<div class="form-wrap">
- <div class="info">
-   <div class="eyebrow">Canada & Australia</div>
-   <h3>Ready to begin?</h3>
-   <p>Fill in the form. After submission, WhatsApp will open with your application details.</p>
-   <div class="contact">📱 <div><b>WhatsApp</b><br><span style="color:#aebbd0">+1 249 477 1916</span></div></div>
-   <div class="contact">🌐 <div><b>Service</b><br><span style="color:#aebbd0">Visa Application Assistance</span></div></div>
-   <p class="notice">Important: This website is an independent visa-assistance/application intake service and is not an official government website. Visa decisions are made by the relevant government authority.</p>
- </div>
- <div class="form">
-  <form onsubmit="sendWhatsApp(event)">
-   <div class="field"><label>First Name</label><input id="firstName" required placeholder="First name"></div>
-   <div class="field"><label>Last Name</label><input id="lastName" required placeholder="Last name"></div>
-   <div class="field"><label>Passport Number</label><input id="passport" required placeholder="Passport number"></div>
-   <div class="field"><label>Nationality</label><input id="nationality" required placeholder="Nationality"></div>
-   <div class="field"><label>Date of Birth</label><input id="dob" type="date" required></div>
-   <div class="field"><label>Phone / WhatsApp</label><input id="phone" required placeholder="Your number"></div>
-   <div class="field"><label>Email Address</label><input id="email" type="email" required placeholder="your@email.com"></div>
-   <div class="field"><label>Country</label><select id="country" required><option value="">Select country</option><option>Canada</option><option>Australia</option></select></div>
-   <div class="field"><label>Visa Type</label><select id="visa" required><option value="">Select visa type</option><option>Work Visa</option><option>Student Visa</option><option>Visitor Visa</option><option>Tourist Visa</option></select></div>
-   <div class="field"><label>Passport Issue Date</label><input id="issueDate" type="date" required></div>
-   <div class="field"><label>Passport Expiry Date</label><input id="expiryDate" type="date" required></div>
-   <div class="field full"><label>Current Address</label><input id="address" required placeholder="Your current address"></div>
-   <div class="field full"><label>Your Message</label><textarea id="message" placeholder="Tell us briefly about your application"></textarea></div>
-   <div class="field full"><button class="btn gold" type="submit">Send Application on WhatsApp →</button></div>
-  </form>
- </div>
-</div>
-</div>
-</section>
-</main>
+<section id="apply"><div class="container"><div class="section-head"><div class="eyebrow">Online application</div><h2>Start your application</h2><p>Complete the form and send the details through WhatsApp.</p></div>
+<div class="form-wrap"><div class="info"><div class="eyebrow">Canada & Australia</div><h3>Ready to begin?</h3><p>Your selected visa will automatically appear in the form.</p>
+<div class="contact">📱 <b>WhatsApp</b><br><span style="color:#aebbd0">+1 249 477 1916</span></div>
+<div class="contact">🌐 <b>Service</b><br><span style="color:#aebbd0">Visa Application Assistance</span></div>
+<p class="notice">Important: This is an independent visa-assistance/application intake service, not an official government website. Visa decisions are made by the relevant government authority.</p></div>
 
-<footer>
-<div class="container footer">
- <div>© 2026 <b>Canada & Australia</b>. All rights reserved.</div>
- <div>Visa Application & Assistance</div>
-</div>
-</footer>
+<div class="form"><form onsubmit="sendWhatsApp(event)">
+<div class="field"><label>First Name</label><input id="firstName" required placeholder="First name"></div>
+<div class="field"><label>Last Name</label><input id="lastName" required placeholder="Last name"></div>
+<div class="field"><label>Passport Number</label><input id="passport" required placeholder="Passport number"></div>
+<div class="field"><label>Nationality</label><input id="nationality" required placeholder="Nationality"></div>
+<div class="field"><label>Date of Birth</label><input id="dob" type="date" required></div>
+<div class="field"><label>Phone / WhatsApp</label><input id="phone" required placeholder="Your number"></div>
+<div class="field"><label>Email Address</label><input id="email" type="email" required placeholder="your@email.com"></div>
+<div class="field"><label>Country</label><select id="country" required><option value="">Select country</option><option>Canada</option><option>Australia</option></select></div>
+<div class="field"><label>Visa Type</label><select id="visa" required><option value="">Select visa type</option><option>Work Visa</option><option>Student Visa</option><option>Visitor Visa</option><option>Tourist Visa</option></select></div>
+<div class="field"><label>Passport Issue Year</label><select id="issueYear" required></select></div>
+<div class="field"><label>Passport Expiry Year</label><select id="expiryYear" required></select></div>
+<div class="field"><label>Passport Issue Date</label><input id="issueDate" type="date" required></div>
+<div class="field"><label>Passport Expiry Date</label><input id="expiryDate" type="date" required></div>
+<div class="field full"><label>Current Address</label><input id="address" required placeholder="Your current address"></div>
+<div class="field full"><label>Your Message</label><textarea id="message" placeholder="Tell us briefly about your application"></textarea></div>
+<div class="field full"><button class="btn gold" type="submit">Send Application on WhatsApp →</button></div>
+</form></div></div></div></section>
 
+<footer><div class="container footer"><div>© 2026 <b>Canada & Australia</b>. All rights reserved.</div><div>Visa Application & Assistance</div></div></footer>
 <script>
-function setVisa(value){
-  const parts=value.split(' - ');
-  document.getElementById('country').value=parts[0];
-  document.getElementById('visa').value=parts[1];
-}
-function sendWhatsApp(e){
- e.preventDefault();
- const firstName=document.getElementById('firstName').value;
- const lastName=document.getElementById('lastName').value;
- const passport=document.getElementById('passport').value;
- const nationality=document.getElementById('nationality').value;
- const dob=document.getElementById('dob').value;
- const phone=document.getElementById('phone').value;
- const email=document.getElementById('email').value;
- const country=document.getElementById('country').value;
- const visa=document.getElementById('visa').value;
- const issueDate=document.getElementById('issueDate').value;
- const expiryDate=document.getElementById('expiryDate').value;
- const address=document.getElementById('address').value;
- const message=document.getElementById('message').value;
- const text=`New Visa Application%0A%0AFirst Name: ${encodeURIComponent(firstName)}%0ALast Name: ${encodeURIComponent(lastName)}%0APassport Number: ${encodeURIComponent(passport)}%0ANationality: ${encodeURIComponent(nationality)}%0ADate of Birth: ${encodeURIComponent(dob)}%0APhone / WhatsApp: ${encodeURIComponent(phone)}%0AEmail: ${encodeURIComponent(email)}%0ACountry: ${encodeURIComponent(country)}%0AVisa Type: ${encodeURIComponent(visa)}%0APassport Issue Date: ${encodeURIComponent(issueDate)}%0APassport Expiry Date: ${encodeURIComponent(expiryDate)}%0ACurrent Address: ${encodeURIComponent(address)}%0AMessage: ${encodeURIComponent(message)}`;
- window.open('https://wa.me/12494771916?text='+text,'_blank');
-}
+const issueYear=document.getElementById('issueYear'),expiryYear=document.getElementById('expiryYear'),currentYear=new Date().getFullYear();
+for(let y=2040;y>=1950;y--){issueYear.add(new Option(y,y));expiryYear.add(new Option(y,y));}
+function setVisa(country,visa){document.getElementById('country').value=country;document.getElementById('visa').value=visa;document.getElementById('apply').scrollIntoView({behavior:'smooth'});}
+function sendWhatsApp(e){e.preventDefault();const v=id=>document.getElementById(id).value;
+const text=`New Visa Application%0A%0AFirst Name: ${encodeURIComponent(v('firstName'))}%0ALast Name: ${encodeURIComponent(v('lastName'))}%0APassport Number: ${encodeURIComponent(v('passport'))}%0ANationality: ${encodeURIComponent(v('nationality'))}%0ADate of Birth: ${encodeURIComponent(v('dob'))}%0APhone / WhatsApp: ${encodeURIComponent(v('phone'))}%0AEmail: ${encodeURIComponent(v('email'))}%0ACountry: ${encodeURIComponent(v('country'))}%0AVisa Type: ${encodeURIComponent(v('visa'))}%0APassport Issue Year: ${encodeURIComponent(v('issueYear'))}%0APassport Issue Date: ${encodeURIComponent(v('issueDate'))}%0APassport Expiry Year: ${encodeURIComponent(v('expiryYear'))}%0APassport Expiry Date: ${encodeURIComponent(v('expiryDate'))}%0ACurrent Address: ${encodeURIComponent(v('address'))}%0AMessage: ${encodeURIComponent(v('message'))}`;
+window.open('https://wa.me/12494771916?text='+text,'_blank');}
 </script>
 </body>
 </html>

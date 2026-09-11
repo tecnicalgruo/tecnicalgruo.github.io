@@ -30,6 +30,30 @@ input,select,textarea{width:100%;padding:13px 14px;border:1px solid var(--line);
 footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-size:13px}.footer{display:flex;justify-content:space-between}
 @media(max-width:900px){nav{display:none}.hero-grid,.form-wrap{grid-template-columns:1fr}.grid,.steps{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:600px){.hero{padding-top:60px}section{padding:60px 0}h2{font-size:34px}.grid,.steps,form{grid-template-columns:1fr}.country{padding:17px}.country-head{flex-direction:column;align-items:flex-start;gap:12px}.footer{flex-direction:column;gap:8px}}
+
+/* Subtle Canada + Australia flag background — visual layer only */
+body{position:relative;overflow-x:hidden}
+body::before{
+ content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;
+ background:
+   radial-gradient(circle at 8% 25%, rgba(210,35,45,.12) 0 4%, transparent 16%),
+   radial-gradient(circle at 92% 70%, rgba(20,92,180,.13) 0 5%, transparent 18%),
+   linear-gradient(90deg, rgba(210,35,45,.035), transparent 28%, transparent 72%, rgba(30,95,190,.04));
+}
+body::after{
+ content:"✦  ✦  ✦";position:fixed;right:-55px;bottom:12%;z-index:-1;
+ font-size:150px;letter-spacing:20px;line-height:1;color:rgba(80,140,230,.045);
+ transform:rotate(-12deg);pointer-events:none;white-space:nowrap;
+}
+.hero:before{
+ content:"";position:absolute;left:-190px;top:120px;width:430px;height:430px;
+ background:
+   linear-gradient(90deg,transparent 42%,rgba(210,35,45,.08) 42% 58%,transparent 58%),
+   linear-gradient(0deg,transparent 42%,rgba(210,35,45,.08) 42% 58%,transparent 58%);
+ clip-path:polygon(0 0,100% 0,100% 100%,0 100%);
+ border-radius:50%;opacity:.55;pointer-events:none;
+}
+
 </style>
 </head>
 <body>
@@ -51,18 +75,18 @@ footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-s
 
 <div class="country"><div class="country-head"><div class="country-title">🇨🇦 Canada<small>Explore Canada visa categories</small></div><span class="badge">4 SERVICES</span></div>
 <div class="grid">
-<div class="card"><img src="01-work-visa(1).jpg" alt="Work Visa"><div class="card-body"><h3>💼 Work Visa</h3><p>Employment and work opportunities.</p><a href="#apply" onclick="setVisa('Canada','Work Visa')">Apply →</a></div></div>
-<div class="card"><img src="02-student-visa(1).jpg" alt="Student Visa"><div class="card-body"><h3>🎓 Student Visa</h3><p>Study plans and education.</p><a href="#apply" onclick="setVisa('Canada','Student Visa')">Apply →</a></div></div>
-<div class="card"><img src="03-visitor-visa(1).jpg" alt="Visitor Visa"><div class="card-body"><h3>🏛️ Visitor Visa</h3><p>Visits and short stays.</p><a href="#apply" onclick="setVisa('Canada','Visitor Visa')">Apply →</a></div></div>
-<div class="card"><img src="04-tourist-visa(1).jpg" alt="Tourist Visa"><div class="card-body"><h3>✈️ Tourist Visa</h3><p>Holidays and tourism.</p><a href="#apply" onclick="setVisa('Canada','Tourist Visa')">Apply →</a></div></div>
+<div class="card"><img src="01-work-visa.jpg" alt="Work Visa"><div class="card-body"><h3>💼 Work Visa</h3><p>Employment and work opportunities.</p><a href="#apply" onclick="setVisa('Canada','Work Visa')">Apply →</a></div></div>
+<div class="card"><img src="02-student-visa.jpg" alt="Student Visa"><div class="card-body"><h3>🎓 Student Visa</h3><p>Study plans and education.</p><a href="#apply" onclick="setVisa('Canada','Student Visa')">Apply →</a></div></div>
+<div class="card"><img src="03-visitor-visa.jpg" alt="Visitor Visa"><div class="card-body"><h3>🏛️ Visitor Visa</h3><p>Visits and short stays.</p><a href="#apply" onclick="setVisa('Canada','Visitor Visa')">Apply →</a></div></div>
+<div class="card"><img src="04-tourist-visa.jpg" alt="Tourist Visa"><div class="card-body"><h3>✈️ Tourist Visa</h3><p>Holidays and tourism.</p><a href="#apply" onclick="setVisa('Canada','Tourist Visa')">Apply →</a></div></div>
 </div></div>
 
 <div class="country"><div class="country-head"><div class="country-title">🇦🇺 Australia<small>Explore Australia visa categories</small></div><span class="badge">4 SERVICES</span></div>
 <div class="grid">
-<div class="card"><img src="01-work-visa(1).jpg" alt="Work Visa"><div class="card-body"><h3>💼 Work Visa</h3><p>Employment and work opportunities.</p><a href="#apply" onclick="setVisa('Australia','Work Visa')">Apply →</a></div></div>
-<div class="card"><img src="02-student-visa(1).jpg" alt="Student Visa"><div class="card-body"><h3>🎓 Student Visa</h3><p>Study plans and education.</p><a href="#apply" onclick="setVisa('Australia','Student Visa')">Apply →</a></div></div>
-<div class="card"><img src="03-visitor-visa(1).jpg" alt="Visitor Visa"><div class="card-body"><h3>🏛️ Visitor Visa</h3><p>Visits and short stays.</p><a href="#apply" onclick="setVisa('Australia','Visitor Visa')">Apply →</a></div></div>
-<div class="card"><img src="04-tourist-visa(1).jpg" alt="Tourist Visa"><div class="card-body"><h3>✈️ Tourist Visa</h3><p>Holidays and tourism.</p><a href="#apply" onclick="setVisa('Australia','Tourist Visa')">Apply →</a></div></div>
+<div class="card"><img src="01-work-visa.jpg" alt="Work Visa"><div class="card-body"><h3>💼 Work Visa</h3><p>Employment and work opportunities.</p><a href="#apply" onclick="setVisa('Australia','Work Visa')">Apply →</a></div></div>
+<div class="card"><img src="02-student-visa.jpg" alt="Student Visa"><div class="card-body"><h3>🎓 Student Visa</h3><p>Study plans and education.</p><a href="#apply" onclick="setVisa('Australia','Student Visa')">Apply →</a></div></div>
+<div class="card"><img src="03-visitor-visa.jpg" alt="Visitor Visa"><div class="card-body"><h3>🏛️ Visitor Visa</h3><p>Visits and short stays.</p><a href="#apply" onclick="setVisa('Australia','Visitor Visa')">Apply →</a></div></div>
+<div class="card"><img src="04-tourist-visa.jpg" alt="Tourist Visa"><div class="card-body"><h3>✈️ Tourist Visa</h3><p>Holidays and tourism.</p><a href="#apply" onclick="setVisa('Australia','Tourist Visa')">Apply →</a></div></div>
 </div></div>
 </div></section>
 
@@ -80,13 +104,34 @@ footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-s
 <div class="field"><label>Last Name</label><input id="lastName" required placeholder="Last name"></div>
 <div class="field"><label>Passport Number</label><input id="passport" required placeholder="Passport number"></div>
 <div class="field"><label>Nationality</label><input id="nationality" required placeholder="Nationality"></div>
-<div class="field"><label>Date of Birth</label><input id="dob" type="date" required></div>
+<div class="field full">
+<label>Date of Birth</label>
+<div class="year-row">
+<select id="dobDay" required><option value="">Day</option></select>
+<select id="dobMonth" required><option value="">Month</option><option value="01">January</option><option value="02">February</option><option value="03">March</option><option value="04">April</option><option value="05">May</option><option value="06">June</option><option value="07">July</option><option value="08">August</option><option value="09">September</option><option value="10">October</option><option value="11">November</option><option value="12">December</option></select>
+<select id="dobYear" required><option value="">Year</option></select>
+</div>
+</div>
 <div class="field"><label>Phone / WhatsApp</label><input id="phone" required placeholder="Your number"></div>
 <div class="field"><label>Email Address</label><input id="email" type="email" required placeholder="your@email.com"></div>
 <div class="field"><label>Country</label><select id="country" required><option value="">Select country</option><option>Canada</option><option>Australia</option></select></div>
 <div class="field"><label>Visa Type</label><select id="visa" required><option value="">Select visa type</option><option>Work Visa</option><option>Student Visa</option><option>Visitor Visa</option><option>Tourist Visa</option></select></div>
-<div class="field"><label>Passport Issue Date</label><input id="issueDate" type="date" min="1950-01-01" max="2040-12-31" required></div>
-<div class="field"><label>Passport Expiry Date</label><input id="expiryDate" type="date" min="1950-01-01" max="2040-12-31" required></div>
+<div class="field full">
+<label>Passport Issue Date</label>
+<div class="year-row">
+<select id="issueDay" required><option value="">Day</option></select>
+<select id="issueMonth" required><option value="">Month</option><option value="01">January</option><option value="02">February</option><option value="03">March</option><option value="04">April</option><option value="05">May</option><option value="06">June</option><option value="07">July</option><option value="08">August</option><option value="09">September</option><option value="10">October</option><option value="11">November</option><option value="12">December</option></select>
+<select id="issueYear" required><option value="">Year</option></select>
+</div>
+</div>
+<div class="field full">
+<label>Passport Expiry Date</label>
+<div class="year-row">
+<select id="expiryDay" required><option value="">Day</option></select>
+<select id="expiryMonth" required><option value="">Month</option><option value="01">January</option><option value="02">February</option><option value="03">March</option><option value="04">April</option><option value="05">May</option><option value="06">June</option><option value="07">July</option><option value="08">August</option><option value="09">September</option><option value="10">October</option><option value="11">November</option><option value="12">December</option></select>
+<select id="expiryYear" required><option value="">Year</option></select>
+</div>
+</div>
 <div class="field full"><label>Current Address</label><input id="address" required placeholder="Your current address"></div>
 <div class="field full"><label>Your Message</label><textarea id="message" placeholder="Tell us briefly about your application"></textarea></div>
 <div class="field full"><button class="btn gold" type="submit">Send Application on WhatsApp →</button></div>
@@ -94,9 +139,16 @@ footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-s
 
 <footer><div class="container footer"><div>© 2026 <b>Canada & Australia</b>. All rights reserved.</div><div>Visa Application & Assistance</div></div></footer>
 <script>
+const issueYear=document.getElementById('issueYear'),expiryYear=document.getElementById('expiryYear');
+const dobYear=document.getElementById('dobYear'),dobDay=document.getElementById('dobDay');
+for(let d=1;d<=31;d++){let n=String(d).padStart(2,'0');dobDay.add(new Option(n,n));}
+for(let y=2040;y>=1950;y--){dobYear.add(new Option(y,y));}
+const issueDay=document.getElementById('issueDay'),expiryDay=document.getElementById('expiryDay');
+for(let d=1;d<=31;d++){let n=String(d).padStart(2,'0');issueDay.add(new Option(n,n));expiryDay.add(new Option(n,n));}
+for(let y=2040;y>=1950;y--){issueYear.add(new Option(y,y));expiryYear.add(new Option(y,y));}
 function setVisa(country,visa){document.getElementById('country').value=country;document.getElementById('visa').value=visa;document.getElementById('apply').scrollIntoView({behavior:'smooth'});}
 function sendWhatsApp(e){e.preventDefault();const v=id=>document.getElementById(id).value;
-const text=`New Visa Application%0A%0AFirst Name: ${encodeURIComponent(v('firstName'))}%0ALast Name: ${encodeURIComponent(v('lastName'))}%0APassport Number: ${encodeURIComponent(v('passport'))}%0ANationality: ${encodeURIComponent(v('nationality'))}%0ADate of Birth: ${encodeURIComponent(v('dob'))}%0APhone / WhatsApp: ${encodeURIComponent(v('phone'))}%0AEmail: ${encodeURIComponent(v('email'))}%0ACountry: ${encodeURIComponent(v('country'))}%0AVisa Type: ${encodeURIComponent(v('visa'))}%0APassport Issue Date: ${encodeURIComponent(v('issueDate'))}%0APassport Expiry Date: ${encodeURIComponent(v('expiryDate'))}%0ACurrent Address: ${encodeURIComponent(v('address'))}%0AMessage: ${encodeURIComponent(v('message'))}`;
+const text=`New Visa Application%0A%0AFirst Name: ${encodeURIComponent(v('firstName'))}%0ALast Name: ${encodeURIComponent(v('lastName'))}%0APassport Number: ${encodeURIComponent(v('passport'))}%0ANationality: ${encodeURIComponent(v('nationality'))}%0ADate of Birth: ${encodeURIComponent(v('dobDay')+' '+v('dobMonth')+' '+v('dobYear'))}%0APhone / WhatsApp: ${encodeURIComponent(v('phone'))}%0AEmail: ${encodeURIComponent(v('email'))}%0ACountry: ${encodeURIComponent(v('country'))}%0AVisa Type: ${encodeURIComponent(v('visa'))}%0APassport Issue Date: ${encodeURIComponent(v('issueDay')+' '+v('issueMonth')+' '+v('issueYear'))}%0APassport Expiry Date: ${encodeURIComponent(v('expiryDay')+' '+v('expiryMonth')+' '+v('expiryYear'))}%0ACurrent Address: ${encodeURIComponent(v('address'))}%0AMessage: ${encodeURIComponent(v('message'))}`;
 window.open('https://wa.me/12494771916?text='+text,'_blank');}
 </script>
 </body>

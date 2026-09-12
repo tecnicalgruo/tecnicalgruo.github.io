@@ -104,6 +104,11 @@ nav a:hover{
   color:#07152d
 }
 
+.btn:disabled{
+  opacity:.65;
+  cursor:not-allowed
+}
+
 .hero{
   padding:90px 0 70px;
   position:relative;
@@ -490,6 +495,40 @@ textarea{
   border-radius:13px;
   background:#08152c;
   color:#aebbd0
+}
+
+/* SUBMISSION SUCCESS */
+
+.application-success{
+  display:none;
+  margin-top:20px;
+  padding:20px;
+  border-radius:16px;
+  border:1px solid rgba(244,201,93,.4);
+  background:#08152c
+}
+
+.application-success h3{
+  color:var(--gold);
+  margin-bottom:8px
+}
+
+.application-success p{
+  color:var(--muted);
+  font-size:14px;
+  margin-bottom:8px
+}
+
+.application-number-display{
+  font-size:22px;
+  font-weight:900;
+  color:#fff;
+  margin:8px 0 16px
+}
+
+.download-btn{
+  width:100%;
+  margin-top:8px
 }
 
 footer{
@@ -1082,7 +1121,7 @@ Start your application
 </h2>
 
 <p>
-Complete the form and send the details through WhatsApp.
+Complete the form and submit your application directly online.
 </p>
 
 </div>
@@ -1145,7 +1184,7 @@ Visa decisions are made by the relevant government authority.
 
 <div class="form">
 
-<form onsubmit="sendWhatsApp(event)">
+<form onsubmit="submitApplication(event)">
 
 
 <div class="field">
@@ -1453,8 +1492,7 @@ Your Message
 
 <textarea
 id="message"
-placeholder="Tell us briefly about your application">
-</textarea>
+placeholder="Tell us briefly about your application"></textarea>
 
 </div>
 
@@ -1462,16 +1500,59 @@ placeholder="Tell us briefly about your application">
 <div class="field full">
 
 <button
+id="submitApplicationButton"
 class="btn gold"
 type="submit"
+style="width:100%"
 >
-Send Application on WhatsApp →
+Submit Application →
 </button>
 
 </div>
 
 
 </form>
+
+
+<!-- SUCCESS -->
+
+<div
+id="applicationSuccess"
+class="application-success">
+
+<h3>
+✓ Application Submitted Successfully
+</h3>
+
+<p>
+Your application has been saved successfully.
+</p>
+
+<p>
+Application Number:
+</p>
+
+<div
+id="applicationNumberDisplay"
+class="application-number-display">
+</div>
+
+<p>
+Please keep this number safe. You can use it in the
+Check Application Status section.
+</p>
+
+<button
+id="downloadPDFButton"
+class="btn gold download-btn"
+type="button"
+onclick="downloadApplicationPDF()"
+>
+Download PDF Again ↓
+</button>
+
+</div>
+
 
 </div>
 
@@ -1503,6 +1584,10 @@ Visa Application & Assistance
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+<!-- jsPDF -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
 
 <script>
 
@@ -1521,6 +1606,13 @@ window.supabase.createClient(
   SUPABASE_URL,
   SUPABASE_PUBLISHABLE_KEY
 );
+
+
+/* ================================
+   GLOBAL PDF DATA
+================================ */
+
+let lastSubmittedApplication = null;
 
 
 /* ================================
@@ -1630,40 +1722,86 @@ function generateApplicationNumber(){
 
 
 /* ================================
-   SEND APPLICATION
+   FORMAT APPLICATION DATE
 ================================ */
 
-async function sendWhatsApp(e){
+function getApplicationDate(){
+
+  return new Date().toLocaleDateString(
+    'en-GB',
+    {
+      day:'2-digit',
+      month:'long',
+      year:'numeric'
+    }
+  );
+
+}
+
+
+/* ================================
+   DIRECT APPLICATION SUBMISSION
+================================ */
+
+async function submitApplication(e){
 
   e.preventDefault();
 
 
-  const v=id =>
-    document.getElementById(id).value;
+  const button =
+    document.getElementById(
+      'submitApplicationButton'
+    );
 
+
+  const successBox =
+    document.getElementById(
+      'applicationSuccess'
+    );
+
+
+  /* BUTTON LOADING */
+
+  button.disabled = true;
+
+  button.textContent =
+    'Submitting Application...';
+
+
+  const v = id =>
+    document.getElementById(id).value.trim();
+
+
+  /* DATES */
 
   const dob =
-    v('dobDay')+' '+
-    v('dobMonth')+' '+
+    v('dobDay') + ' ' +
+    v('dobMonth') + ' ' +
     v('dobYear');
 
 
   const issueDate =
-    v('issueDay')+' '+
-    v('issueMonth')+' '+
+    v('issueDay') + ' ' +
+    v('issueMonth') + ' ' +
     v('issueYear');
 
 
   const expiryDate =
-    v('expiryDay')+' '+
-    v('expiryMonth')+' '+
+    v('expiryDay') + ' ' +
+    v('expiryMonth') + ' ' +
     v('expiryYear');
 
 
-  /* CREATE APPLICATION NUMBER */
+  /* APPLICATION NUMBER */
 
   const applicationNumber =
     generateApplicationNumber();
+
+
+  /* APPLICATION DATE */
+
+  const applicationDate =
+    getApplicationDate();
 
 
   /* APPLICATION DATA */
@@ -1717,13 +1855,19 @@ async function sendWhatsApp(e){
   };
 
 
-  /* SAVE TO SUPABASE */
+  /* ================================
+     DIRECT SUPABASE INSERT
+  ================================= */
 
   const { error } =
     await supabaseClient
       .from('visa_applications')
       .insert([application]);
 
+
+  /* ================================
+     ERROR
+  ================================= */
 
   if(error){
 
@@ -1733,49 +1877,526 @@ async function sendWhatsApp(e){
     );
 
     alert(
-      'Application could not be saved. Please try again.'
+      'Application could not be submitted.\n\n' +
+      'Please check your internet connection and try again.'
+    );
+
+    button.disabled = false;
+
+    button.textContent =
+      'Submit Application →';
+
+    return;
+  }
+
+
+  /* ================================
+     SAVE DATA FOR PDF
+  ================================= */
+
+  lastSubmittedApplication = {
+
+    applicantName:
+      application.first_name +
+      ' ' +
+      application.last_name,
+
+    applicationNumber:
+      application.application_number,
+
+    visaType:
+      application.visa_type,
+
+    country:
+      application.country,
+
+    applicationDate:
+      applicationDate,
+
+    paymentService:
+      'Visa Application Assistance | Payment: To be confirmed',
+
+    status:
+      application.status,
+
+    business:
+      'CANADA & AUSTRALIA',
+
+    service:
+      'Visa Application & Assistance',
+
+    whatsapp:
+      '+1 249 477 1916',
+
+    website:
+      'tecnicalgruo.github.io'
+  };
+
+
+  /* ================================
+     SHOW SUCCESS
+  ================================= */
+
+  document.getElementById(
+    'applicationNumberDisplay'
+  ).textContent =
+    applicationNumber;
+
+
+  successBox.style.display =
+    'block';
+
+
+  /* ================================
+     AUTO GENERATE PDF
+  ================================= */
+
+  generateApplicationPDF(
+    lastSubmittedApplication
+  );
+
+
+  /* ================================
+     SUCCESS MESSAGE
+  ================================= */
+
+  alert(
+    'Application submitted successfully!\n\n' +
+    'Application Number:\n' +
+    applicationNumber +
+    '\n\n' +
+    'Your application has been saved.\n' +
+    'Your PDF is being downloaded automatically.'
+  );
+
+
+  /* RESET FORM */
+
+  document.querySelector('form').reset();
+
+
+  /* BUTTON */
+
+  button.disabled = false;
+
+  button.textContent =
+    'Submit Application →';
+
+
+  /* SCROLL TO SUCCESS */
+
+  successBox.scrollIntoView({
+    behavior:'smooth',
+    block:'center'
+  });
+
+}
+
+
+/* ================================
+   GENERATE APPLICATION PDF
+================================ */
+
+function generateApplicationPDF(application){
+
+  try{
+
+    if(
+      !window.jspdf ||
+      !window.jspdf.jsPDF
+    ){
+
+      alert(
+        'PDF library could not be loaded. Please try again.'
+      );
+
+      return;
+    }
+
+
+    const { jsPDF } =
+      window.jspdf;
+
+
+    const doc =
+      new jsPDF();
+
+
+    /* PAGE BACKGROUND HEADER */
+
+    doc.setFillColor(
+      7,
+      21,
+      45
+    );
+
+    doc.rect(
+      0,
+      0,
+      210,
+      38,
+      'F'
+    );
+
+
+    /* TITLE */
+
+    doc.setTextColor(
+      255,
+      255,
+      255
+    );
+
+    doc.setFont(
+      'helvetica',
+      'bold'
+    );
+
+    doc.setFontSize(20);
+
+    doc.text(
+      'CANADA & AUSTRALIA',
+      20,
+      17
+    );
+
+
+    doc.setFontSize(10);
+
+    doc.setFont(
+      'helvetica',
+      'normal'
+    );
+
+    doc.text(
+      'Visa Application & Assistance',
+      20,
+      27
+    );
+
+
+    /* PDF TITLE */
+
+    doc.setTextColor(
+      7,
+      21,
+      45
+    );
+
+    doc.setFont(
+      'helvetica',
+      'bold'
+    );
+
+    doc.setFontSize(18);
+
+    doc.text(
+      'Application Confirmation',
+      20,
+      55
+    );
+
+
+    /* LINE */
+
+    doc.setDrawColor(
+      244,
+      201,
+      93
+    );
+
+    doc.setLineWidth(1);
+
+    doc.line(
+      20,
+      61,
+      190,
+      61
+    );
+
+
+    /* DATA ROW FUNCTION */
+
+    let y = 76;
+
+
+    function addRow(label,value){
+
+      doc.setFont(
+        'helvetica',
+        'bold'
+      );
+
+      doc.setFontSize(10);
+
+      doc.setTextColor(
+        90,
+        105,
+        125
+      );
+
+      doc.text(
+        label,
+        20,
+        y
+      );
+
+
+      doc.setFont(
+        'helvetica',
+        'normal'
+      );
+
+      doc.setFontSize(11);
+
+      doc.setTextColor(
+        20,
+        30,
+        45
+      );
+
+
+      const lines =
+        doc.splitTextToSize(
+          String(value || ''),
+          115
+        );
+
+
+      doc.text(
+        lines,
+        75,
+        y
+      );
+
+
+      y +=
+        Math.max(
+          13,
+          lines.length * 6
+        );
+
+      y += 5;
+
+    }
+
+
+    /* ================================
+       REQUIRED 8 PDF ITEMS
+    ================================= */
+
+    addRow(
+      'Applicant Name',
+      application.applicantName
+    );
+
+
+    addRow(
+      'Application Number',
+      application.applicationNumber
+    );
+
+
+    addRow(
+      'Visa Type',
+      application.visaType
+    );
+
+
+    addRow(
+      'Country',
+      application.country
+    );
+
+
+    addRow(
+      'Application Date',
+      application.applicationDate
+    );
+
+
+    addRow(
+      'Payment / Service',
+      application.paymentService
+    );
+
+
+    addRow(
+      'Application Status',
+      application.status
+    );
+
+
+    addRow(
+      'Website / Business',
+      application.business +
+      ' | ' +
+      application.service +
+      ' | WhatsApp: ' +
+      application.whatsapp +
+      ' | ' +
+      application.website
+    );
+
+
+    /* ================================
+       FOOTER NOTICE
+    ================================= */
+
+    const footerY =
+      Math.min(
+        y + 10,
+        255
+      );
+
+
+    doc.setFillColor(
+      245,
+      247,
+      250
+    );
+
+
+    doc.roundedRect(
+      20,
+      footerY,
+      170,
+      32,
+      3,
+      3,
+      'F'
+    );
+
+
+    doc.setFont(
+      'helvetica',
+      'bold'
+    );
+
+    doc.setFontSize(9);
+
+    doc.setTextColor(
+      70,
+      80,
+      95
+    );
+
+
+    doc.text(
+      'Important Notice',
+      27,
+      footerY + 10
+    );
+
+
+    doc.setFont(
+      'helvetica',
+      'normal'
+    );
+
+    doc.setFontSize(8);
+
+    const notice =
+      'This is an independent visa-assistance/application intake service, ' +
+      'not an official government website. Visa decisions are made by the ' +
+      'relevant government authority.';
+
+
+    const noticeLines =
+      doc.splitTextToSize(
+        notice,
+        155
+      );
+
+
+    doc.text(
+      noticeLines,
+      27,
+      footerY + 17
+    );
+
+
+    /* ================================
+       PDF FOOTER
+    ================================= */
+
+    doc.setFontSize(8);
+
+    doc.setTextColor(
+      120,
+      130,
+      145
+    );
+
+
+    doc.text(
+      'CANADA & AUSTRALIA | Visa Application & Assistance',
+      20,
+      285
+    );
+
+
+    doc.text(
+      'Application: ' +
+      application.applicationNumber,
+      190,
+      285,
+      {
+        align:'right'
+      }
+    );
+
+
+    /* ================================
+       DOWNLOAD
+    ================================= */
+
+    const safeNumber =
+      application.applicationNumber
+        .replace(/[^a-zA-Z0-9-_]/g,'_');
+
+
+    doc.save(
+      safeNumber +
+      '-application.pdf'
+    );
+
+
+  }catch(error){
+
+    console.error(
+      'PDF generation error:',
+      error
+    );
+
+    alert(
+      'Application was saved, but the PDF could not be generated. ' +
+      'You can try the Download PDF Again button.'
+    );
+
+  }
+
+}
+
+
+/* ================================
+   DOWNLOAD PDF AGAIN
+================================ */
+
+function downloadApplicationPDF(){
+
+  if(!lastSubmittedApplication){
+
+    alert(
+      'No application is available for PDF download yet.'
     );
 
     return;
   }
 
 
-  /* SHOW APPLICATION NUMBER */
-
-  alert(
-    'Application submitted successfully!\\n\\n' +
-    'Your Application Number:\\n' +
-    applicationNumber +
-    '\\n\\nPlease save this number to check your application status.'
-  );
-
-
-  /* WHATSAPP MESSAGE */
-
-  const text =
-`New Visa Application
-
-Application Number: ${applicationNumber}
-
-First Name: ${v('firstName')}
-Last Name: ${v('lastName')}
-Passport Number: ${v('passport')}
-Nationality: ${v('nationality')}
-Date of Birth: ${dob}
-Phone / WhatsApp: ${v('phone')}
-Email: ${v('email')}
-Country: ${v('country')}
-Visa Type: ${v('visa')}
-Passport Issue Date: ${issueDate}
-Passport Expiry Date: ${expiryDate}
-Current Address: ${v('address')}
-Message: ${v('message')}`;
-
-
-  window.open(
-    'https://wa.me/12494771916?text=' +
-    encodeURIComponent(text),
-    '_blank'
+  generateApplicationPDF(
+    lastSubmittedApplication
   );
 
 }
@@ -1791,6 +2412,7 @@ async function checkApplicationStatus(){
     document.getElementById(
       'checkApplicationNumber'
     );
+
 
   const result =
     document.getElementById(

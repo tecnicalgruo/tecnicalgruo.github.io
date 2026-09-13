@@ -67,6 +67,13 @@ input:focus{border-color:var(--blue)}
 .modal-box{width:min(850px,100%);max-height:90vh;overflow:auto;background:#0b1b37;border:1px solid var(--line);border-radius:20px;padding:25px}
 .modal-head{display:flex;justify-content:space-between;gap:15px;align-items:center}
 .close{background:transparent;color:#fff;border:1px solid var(--line);border-radius:9px;padding:7px 11px}
+.photo-upload{margin-top:18px;padding:15px;border:1px solid var(--line);border-radius:12px;background:#08152c}
+.photo-upload h3{font-size:14px;margin-bottom:10px}
+.photo-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.photo-row input[type=file]{flex:1;min-width:220px;padding:9px;background:#0b1b37}
+.photo-preview{margin-top:14px}
+.photo-preview img{max-width:100%;max-height:320px;border-radius:12px;border:1px solid var(--line);display:block}
+.photo-link{display:inline-block;margin-top:9px;color:#f4c95d;font-weight:800;text-decoration:none}
 @media(max-width:700px){
   .topbar-inner{height:auto;padding:14px 0;align-items:flex-start}
   .user-area{flex-direction:column;align-items:flex-end}
@@ -317,6 +324,7 @@ function renderApplications(){
       <td>
         <div class="action-row">
           <button class="btn btn-dark" onclick="showDetails(${Number(app.id)})">View</button>
+          <button class="btn btn-gold" onclick="uploadPhotoForApplication(${Number(app.id)})">Photo</button>
           <button class="btn btn-danger" onclick="deleteApplication(${Number(app.id)})">Delete</button>
         </div>
       </td>
@@ -368,6 +376,7 @@ window.showDetails = function(id){
 
   const fields = [
     ['Application ID', app.id],
+    ['Application Number', app.application_number],
     ['First Name', app.first_name],
     ['Last Name', app.last_name],
     ['Passport Number', app.passport_number],
@@ -390,9 +399,99 @@ window.showDetails = function(id){
       <b>${escapeHtml(label)}</b>
       <div>${escapeHtml(value || '-')}</div>
     </div>
-  `).join('');
+  `).join('') + `
+    <div class="photo-upload" style="grid-column:1/-1">
+      <h3>Application Photo</h3>
+      <div class="photo-row">
+        <input id="applicationPhotoInput" type="file" accept="image/*">
+        <button class="btn btn-gold" onclick="saveApplicationPhoto(${Number(app.id)})">Upload Photo</button>
+      </div>
+      <div id="photoMessage" class="message"></div>
+      <div id="photoPreview" class="photo-preview">
+        ${app.document_photo_url ? `<a class="photo-link" href="${escapeHtml(app.document_photo_url)}" target="_blank" rel="noopener">Open saved photo ↗</a>` : '<span class="muted">No photo uploaded yet.</span>'}
+      </div>
+    </div>
+  `;
 
   detailsModal.classList.add('show');
+};
+
+
+window.uploadPhotoForApplication = function(id){
+  showDetails(id);
+  setTimeout(()=>{
+    const input=document.getElementById('applicationPhotoInput');
+    if(input) input.click();
+  },50);
+};
+
+window.saveApplicationPhoto = async function(id){
+  const app=applications.find(x=>Number(x.id)===Number(id));
+  const input=document.getElementById('applicationPhotoInput');
+  const msg=document.getElementById('photoMessage');
+  if(!app || !input || !input.files || !input.files[0]) {
+    if(msg){
+      msg.textContent='Please choose an image first.';
+      msg.className='message show error';
+    }
+    return;
+  }
+
+  const file=input.files[0];
+  if(!file.type.startsWith('image/')){
+    msg.textContent='Please select an image file.';
+    msg.className='message show error';
+    return;
+  }
+
+  if(file.size > 5 * 1024 * 1024){
+    msg.textContent='Photo must be 5 MB or smaller.';
+    msg.className='message show error';
+    return;
+  }
+
+  msg.textContent='Uploading photo...';
+  msg.className='message show success';
+
+  const safeName=file.name.replace(/[^a-zA-Z0-9._-]/g,'_');
+  const path=`${app.application_number || 'application-'+id}/${Date.now()}-${safeName}`;
+
+  const {error:uploadError}=await supabaseClient.storage
+    .from('application-files')
+    .upload(path,file,{upsert:false,contentType:file.type});
+
+  if(uploadError){
+    msg.textContent='Upload failed: '+uploadError.message;
+    msg.className='message show error';
+    return;
+  }
+
+  const {data:urlData}=supabaseClient.storage
+    .from('application-files')
+    .getPublicUrl(path);
+
+  const photoUrl=urlData.publicUrl;
+
+  const {error:updateError}=await supabaseClient
+    .from('visa_applications')
+    .update({document_photo_url:photoUrl})
+    .eq('id',id);
+
+  if(updateError){
+    msg.textContent='Photo uploaded, but database update failed: '+updateError.message;
+    msg.className='message show error';
+    return;
+  }
+
+  app.document_photo_url=photoUrl;
+  msg.textContent='Photo uploaded successfully.';
+  msg.className='message show success';
+
+  const preview=document.getElementById('photoPreview');
+  if(preview){
+    preview.innerHTML=`<img src="${escapeHtml(photoUrl)}" alt="Application photo">
+      <a class="photo-link" href="${escapeHtml(photoUrl)}" target="_blank" rel="noopener">Open saved photo ↗</a>`;
+  }
 };
 
 document.getElementById('closeModal').addEventListener('click', ()=>{

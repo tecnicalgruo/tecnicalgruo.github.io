@@ -1900,8 +1900,23 @@ async function submitApplication(e){
       ' ' +
       application.last_name,
 
+    firstName:
+      application.first_name,
+
+    lastName:
+      application.last_name,
+
     applicationNumber:
       application.application_number,
+
+    passportNumber:
+      application.passport_number,
+
+    nationality:
+      application.nationality,
+
+    dateOfBirth:
+      application.date_of_birth,
 
     visaType:
       application.visa_type,
@@ -1911,6 +1926,24 @@ async function submitApplication(e){
 
     applicationDate:
       applicationDate,
+
+    passportIssueDate:
+      application.passport_issue_date,
+
+    passportExpiryDate:
+      application.passport_expiry_date,
+
+    currentAddress:
+      application.current_address,
+
+    transactionReference:
+      generateReference('TRX'),
+
+    serviceReference:
+      generateReference('SRV'),
+
+    applicantType:
+      'PRIMARY',
 
     paymentService:
       'Visa Application Assistance | Payment: To be confirmed',
@@ -1996,6 +2029,29 @@ async function submitApplication(e){
    GENERATE APPLICATION PDF
 ================================ */
 
+function generateReference(prefix){
+
+  const chars =
+    'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+
+  let random = '';
+
+  for(let i=0;i<8;i++){
+
+    random += chars.charAt(
+      Math.floor(Math.random()*chars.length)
+    );
+
+  }
+
+  return prefix + '-' + random;
+}
+
+
+/* ================================
+   GENERATE APPLICATION PDF
+================================ */
+
 function generateApplicationPDF(application){
 
   try{
@@ -2013,433 +2069,519 @@ function generateApplicationPDF(application){
     }
 
     const { jsPDF } = window.jspdf;
+
     const doc = new jsPDF({
       orientation:'portrait',
       unit:'mm',
       format:'a4'
     });
 
+    const W = 210;
+    const H = 297;
+
+    const left = 25;
+    const right = 185;
+    const contentW = right - left;
+
     const navy = [7,21,45];
-    const blue = [29,92,255];
-    const gold = [244,201,93];
+    const blue = [18,99,153];
+    const blue2 = [23,116,174];
     const ink = [25,35,50];
     const muted = [95,105,120];
+    const line = [190,196,204];
     const light = [245,247,250];
-    const line = [220,225,232];
 
-    /* ================================
-       CODE 39 BARCODE
-       Application number is encoded
-       with Code 39 and shown directly
-       underneath, matching the reference.
-    ================================= */
+    const name = application.applicantName || 'Applicant';
+    const appNo = application.applicationNumber || 'CA-APPLICATION';
+    const appDate = application.applicationDate || '';
+    const transaction = application.transactionReference || generateReference('TRX');
+    const serviceRef = application.serviceReference || generateReference('SRV');
+    const dob = application.dateOfBirth || '';
+    const visa = application.visaType || '';
+    const country = application.country || '';
+    const address = application.currentAddress || '';
+    const nationality = application.nationality || '';
+    const status = application.status || 'New';
 
-    const code39Patterns = {
-      "0":"101001101101","1":"110100101011","2":"101100101011",
-      "3":"110110010101","4":"101001101011","5":"110100110101",
-      "6":"101100110101","7":"101001011011","8":"110100101101",
-      "9":"101100101101","A":"110101001011","B":"101101001011",
-      "C":"110110100101","D":"101011001011","E":"110101100101",
-      "F":"101101100101","G":"101010011011","H":"110101001101",
-      "I":"101101001101","J":"101011001101","K":"110101010011",
-      "L":"101101010011","M":"110110101001","N":"101011010011",
-      "O":"110101101001","P":"101101101001","Q":"101010110011",
-      "R":"110101011001","S":"101101011001","T":"101011011001",
-      "U":"110010101011","V":"100110101011","W":"110011010101",
-      "X":"100101101011","Y":"110010110101","Z":"100110110101",
-      "-":"100101011011",".":"110010101101"," ":"100110101101",
-      "$":"100100100101","/":"100100101001","+":"100101001001",
-      "%":"101001001001"
-    };
 
-    function drawCode39(value,x,y,width,height){
-
-      const text =
-        '*' +
-        String(value || '')
-          .toUpperCase()
-          .replace(/[^0-9A-Z\-. $/+%]/g,'') +
-        '*';
-
-      let totalModules = 0;
-
-      for(const ch of text){
-        const pattern = code39Patterns[ch];
-        if(pattern) totalModules += pattern.length + 1;
-      }
-
-      const moduleWidth = width / totalModules;
-
-      let cursor = x;
-
-      doc.setFillColor(0,0,0);
-
-      for(const ch of text){
-
-        const pattern = code39Patterns[ch];
-        if(!pattern) continue;
-
-        for(let i=0;i<pattern.length;i++){
-
-          if(pattern[i] === '1'){
-            doc.rect(
-              cursor,
-              y,
-              moduleWidth,
-              height,
-              'F'
-            );
-          }
-
-          cursor += moduleWidth;
-        }
-
-        cursor += moduleWidth;
-      }
-    }
-
-    /* ================================
-       PAGE
-    ================================= */
+    /* PAGE */
 
     doc.setFillColor(255,255,255);
-    doc.rect(0,0,210,297,'F');
+    doc.rect(0,0,W,H,'F');
 
-    /* thin top accent */
-    doc.setFillColor(...navy);
-    doc.rect(0,0,210,2.5,'F');
 
-    /* ================================
-       HEADER
-    ================================= */
+    /* BLUE HEADER */
 
-    doc.setTextColor(...navy);
+    doc.setFillColor(...blue);
+    doc.rect(0,0,W,38,'F');
+
+    doc.setFillColor(...blue2);
+
+    doc.triangle(
+      162,38,
+      210,38,
+      210,0,
+      'F'
+    );
+
+    doc.setTextColor(255,255,255);
     doc.setFont('helvetica','bold');
-    doc.setFontSize(17);
-    doc.text('CANADA & AUSTRALIA',20,18);
+    doc.setFontSize(15);
+
+    doc.text(
+      'CANADA & AUSTRALIA',
+      left,
+      14
+    );
+
+    doc.setFont('helvetica','normal');
+    doc.setFontSize(9);
+
+    doc.text(
+      'Visa Application & Assistance',
+      left,
+      21
+    );
+
+    doc.setFontSize(6.7);
+
+    doc.text(
+      'PRIVATE APPLICATION CONFIRMATION',
+      left,
+      28
+    );
+
+
+    /* DATE */
+
+    doc.setTextColor(35,45,60);
+    doc.setFont('helvetica','normal');
+    doc.setFontSize(9.5);
+
+    doc.text(
+      appDate,
+      left,
+      50
+    );
+
+
+    /* BARCODE */
+
+    drawCode39(
+      appNo,
+      128,
+      44,
+      57,
+      9
+    );
+
+    doc.setFont('helvetica','bold');
+    doc.setFontSize(8);
+
+    doc.text(
+      appNo,
+      156.5,
+      58,
+      {align:'center'}
+    );
+
+
+    /* ADDRESS */
+
+    let y = 70;
 
     doc.setFont('helvetica','normal');
     doc.setFontSize(9.5);
-    doc.setTextColor(...muted);
-    doc.text('Visa Application & Assistance',20,25);
 
-    doc.setFontSize(8);
-    doc.setTextColor(...muted);
     doc.text(
-      application.applicationDate || '',
-      190,
-      18,
-      {align:'right'}
+      name,
+      left,
+      y
     );
 
-    /* independent-service label */
-    doc.setFillColor(...light);
-    doc.roundedRect(20,30,62,7,2,2,'F');
-    doc.setFont('helvetica','bold');
-    doc.setFontSize(6.8);
-    doc.setTextColor(...blue);
-    doc.text(
-      'INDEPENDENT VISA ASSISTANCE',
-      51,
-      34.5,
-      {align:'center'}
-    );
+    y += 5.5;
 
-    /* ================================
-       APPLICATION NUMBER BOX
-    ================================= */
+    if(address){
 
-    const boxX = 128;
-    const boxY = 30;
-    const boxW = 62;
-    const boxH = 35;
+      const addressLines =
+        doc.splitTextToSize(
+          address,
+          78
+        );
 
-    doc.setDrawColor(...line);
-    doc.setLineWidth(.45);
-    doc.roundedRect(boxX,boxY,boxW,boxH,2.5,2.5,'S');
-
-    doc.setFont('helvetica','bold');
-    doc.setFontSize(7);
-    doc.setTextColor(...muted);
-    doc.text('Application Number',boxX+5,boxY+7);
-
-    drawCode39(
-      application.applicationNumber,
-      boxX+5,
-      boxY+10,
-      boxW-10,
-      12
-    );
-
-    doc.setFont('helvetica','bold');
-    doc.setFontSize(9);
-    doc.setTextColor(...ink);
-    doc.text(
-      String(application.applicationNumber || ''),
-      boxX + boxW/2,
-      boxY + 29,
-      {align:'center'}
-    );
-
-    /* ================================
-       TITLE
-    ================================= */
-
-    doc.setFont('helvetica','bold');
-    doc.setFontSize(15);
-    doc.setTextColor(...navy);
-    doc.text('Application Confirmation',20,55);
-
-    doc.setDrawColor(...gold);
-    doc.setLineWidth(1);
-    doc.line(20,61,190,61);
-
-    doc.setFont('helvetica','normal');
-    doc.setFontSize(8.5);
-    doc.setTextColor(...muted);
-    doc.text(
-      'Application confirmation and service details',
-      20,
-      68
-    );
-
-    /* ================================
-       SECTION HELPER
-    ================================= */
-
-    function sectionTitle(title,y){
-
-      doc.setFillColor(...navy);
-      doc.roundedRect(20,y,170,8,1.5,1.5,'F');
-
-      doc.setFont('helvetica','bold');
-      doc.setFontSize(7.5);
-      doc.setTextColor(255,255,255);
-      doc.text(title,25,y+5.2);
-
-      return y + 14;
-    }
-
-    function row(label,value,y){
-
-      doc.setFont('helvetica','bold');
-      doc.setFontSize(7.5);
-      doc.setTextColor(...muted);
-      doc.text(label,25,y);
-
-      doc.setFont('helvetica','normal');
-      doc.setFontSize(8.5);
-      doc.setTextColor(...ink);
-
-      const lines = doc.splitTextToSize(
-        String(value || ''),
-        105
+      doc.text(
+        addressLines,
+        left,
+        y
       );
 
-      doc.text(lines,80,y);
+      y += addressLines.length * 5;
+
+    }
+
+    if(nationality){
+
+      doc.text(
+        String(nationality).toUpperCase(),
+        left,
+        y
+      );
+
+      y += 5;
+
+    }
+
+
+    /* GREETING */
+
+    y += 3;
+
+    doc.setFont('helvetica','bold');
+    doc.setFontSize(9.5);
+
+    doc.text(
+      'Dear ' + name,
+      left,
+      y
+    );
+
+    y += 12;
+
+
+    /* TITLE */
+
+    doc.setFont('helvetica','bold');
+    doc.setFontSize(11.5);
+
+    const title =
+      'Application confirmation for your visa assistance request';
+
+    const titleLines =
+      doc.splitTextToSize(
+        title,
+        contentW
+      );
+
+    doc.text(
+      titleLines,
+      left,
+      y
+    );
+
+    y += titleLines.length * 5.2 + 5;
+
+
+    /* APPLICATION DETAILS */
+
+    doc.setFontSize(10);
+    doc.setFont('helvetica','bold');
+
+    doc.text(
+      'Application details',
+      left,
+      y
+    );
+
+    y += 8;
+
+
+    function detailRow(label,value){
+
+      const rowY = y;
 
       doc.setDrawColor(...line);
       doc.setLineWidth(.25);
-      doc.line(25,y+3.5,185,y+3.5);
 
-      return y + Math.max(8,lines.length*4.5);
+      doc.line(
+        left,
+        rowY + 4,
+        right,
+        rowY + 4
+      );
+
+      doc.setFont('helvetica','bold');
+      doc.setFontSize(8);
+      doc.setTextColor(55,65,78);
+
+      doc.text(
+        label,
+        left + 1,
+        rowY
+      );
+
+      doc.setFont('helvetica','normal');
+      doc.setTextColor(...ink);
+
+      const valueLines =
+        doc.splitTextToSize(
+          String(value || ''),
+          92
+        );
+
+      doc.text(
+        valueLines,
+        90,
+        rowY
+      );
+
+      y += Math.max(
+        7.5,
+        valueLines.length * 4.2
+      );
+
     }
 
-    /* ================================
-       APPLICATION DETAILS
-    ================================= */
 
-    let y = sectionTitle('Application details',78);
-
-    y = row(
+    detailRow(
       'Date of application',
-      application.applicationDate,
-      y
+      appDate
     );
 
-    y = row(
+    detailRow(
       'Application number',
-      application.applicationNumber,
-      y
+      appNo
     );
 
-    y = row(
+    detailRow(
+      'Transaction reference',
+      transaction
+    );
+
+    detailRow(
       'Service reference',
-      application.applicationNumber,
+      serviceRef
+    );
+
+
+    doc.setDrawColor(...line);
+
+    doc.line(
+      left,
+      y - 3,
+      right,
+      y - 3
+    );
+
+    y += 7;
+
+
+    /* APPLICANT INFORMATION */
+
+    doc.setFont('helvetica','bold');
+    doc.setFontSize(10);
+    doc.setTextColor(...ink);
+
+    doc.text(
+      'Applicant information',
+      left,
       y
     );
 
-    /* ================================
-       APPLICANT INFORMATION
-    ================================= */
+    y += 7;
 
-    y += 4;
-    y = sectionTitle('Applicant information',y);
 
-    y = row(
-      'Applicant type',
-      'PRIMARY',
-      y
+    const rows = [
+
+      ['Applicant Type','PRIMARY'],
+      ['Name',name],
+      ['Date of Birth',dob],
+      ['Visa Type',visa],
+      ['Country',country],
+      ['Application Status',status]
+
+    ];
+
+    const tableX = left;
+    const tableY = y;
+    const tableW = contentW;
+    const labelW = 60;
+    const rowH = 8.5;
+
+    doc.setDrawColor(55,65,78);
+    doc.setLineWidth(.35);
+
+    doc.rect(
+      tableX,
+      tableY,
+      tableW,
+      rows.length * rowH
     );
 
-    y = row(
-      'Name',
-      application.applicantName,
-      y
+    doc.line(
+      tableX + labelW,
+      tableY,
+      tableX + labelW,
+      tableY + rows.length * rowH
     );
 
-    y = row(
-      'Visa type',
-      application.visaType,
-      y
-    );
 
-    y = row(
-      'Country',
-      application.country,
-      y
-    );
+    rows.forEach((row,index) => {
 
-    y = row(
-      'Application status',
-      application.status,
-      y
-    );
+      const ry =
+        tableY +
+        index * rowH;
 
-    /* ================================
-       SERVICE / PAYMENT
-    ================================= */
+      if(index > 0){
 
-    y += 4;
-    y = sectionTitle('Service information',y);
+        doc.line(
+          tableX,
+          ry,
+          tableX + tableW,
+          ry
+        );
 
-    y = row(
-      'Service',
-      application.service,
-      y
-    );
+      }
 
-    y = row(
-      'Payment / service',
-      application.paymentService,
-      y
-    );
+      doc.setFont('helvetica','bold');
+      doc.setFontSize(7.8);
+      doc.setTextColor(55,65,78);
 
-    /* ================================
-       IMPORTANT INFORMATION
-    ================================= */
+      doc.text(
+        row[0],
+        tableX + 2,
+        ry + 5.6
+      );
 
-    const noticeY = Math.min(y+4,236);
+      doc.setFont('helvetica','normal');
+      doc.setFontSize(8.2);
+      doc.setTextColor(...ink);
+
+      doc.text(
+        String(row[1] || ''),
+        tableX + labelW + 2,
+        ry + 5.6
+      );
+
+    });
+
+
+    y =
+      tableY +
+      rows.length * rowH +
+      8;
+
+
+    /* PRIVATE SERVICE NOTICE */
+
+    const noticeH = 38;
+
+    if(y + noticeH > 268){
+
+      doc.addPage();
+      y = 25;
+
+    }
 
     doc.setFillColor(...light);
+
     doc.roundedRect(
-      20,
-      noticeY,
-      170,
-      35,
-      2.5,
-      2.5,
+      left,
+      y,
+      contentW,
+      noticeH,
+      2,
+      2,
       'F'
     );
 
     doc.setFont('helvetica','bold');
     doc.setFontSize(8.5);
     doc.setTextColor(...navy);
-    doc.text('Important information',25,noticeY+9);
+
+    doc.text(
+      'Important information',
+      left + 5,
+      y + 8
+    );
 
     doc.setFont('helvetica','normal');
-    doc.setFontSize(7.5);
+    doc.setFontSize(7.2);
     doc.setTextColor(...muted);
 
     const notice =
-      'This document confirms receipt of an application/service request submitted ' +
-      'through Canada & Australia Visa Application & Assistance.';
+      'This document confirms receipt of an application/service request submitted through CANADA & AUSTRALIA Visa Application & Assistance.';
 
     doc.text(
-      doc.splitTextToSize(notice,155),
-      25,
-      noticeY+16
+      doc.splitTextToSize(
+        notice,
+        contentW - 10
+      ),
+      left + 5,
+      y + 15
     );
 
     doc.setFont('helvetica','bold');
     doc.setFontSize(7);
-    doc.setTextColor(...ink);
+    doc.setTextColor(45,55,68);
 
     const disclaimer =
-      'This is an independent private service and is NOT an official Government of ' +
-      'Canada or Australia document. Visa decisions are made only by the relevant ' +
-      'government authority.';
+      'This is an independent private service document and is NOT issued by, or affiliated with, any government immigration authority. Visa decisions are made only by the relevant government authority.';
 
     doc.text(
-      doc.splitTextToSize(disclaimer,155),
-      25,
-      noticeY+23
+      doc.splitTextToSize(
+        disclaimer,
+        contentW - 10
+      ),
+      left + 5,
+      y + 25
     );
 
-    /* ================================
-       CONTACT
-    ================================= */
 
-    doc.setFont('helvetica','bold');
-    doc.setFontSize(7);
-    doc.setTextColor(...muted);
-    doc.text('SERVICE CONTACT',25,noticeY+31);
-
-    doc.setFont('helvetica','normal');
-    doc.setTextColor(...ink);
-    doc.text(
-      'WhatsApp: ' +
-      String(application.whatsapp || '') +
-      '  |  ' +
-      String(application.website || ''),
-      75,
-      noticeY+31
-    );
-
-    /* ================================
-       FOOTER
-    ================================= */
+    /* FOOTER */
 
     doc.setDrawColor(...line);
-    doc.setLineWidth(.35);
-    doc.line(20,280,190,280);
+    doc.setLineWidth(.3);
+
+    doc.line(
+      18,
+      280,
+      192,
+      280
+    );
 
     doc.setFont('helvetica','bold');
     doc.setFontSize(7);
     doc.setTextColor(...navy);
+
     doc.text(
-      'CANADA & AUSTRALIA | VISA APPLICATION & ASSISTANCE',
+      'CANADA & AUSTRALIA Visa Application & Assistance',
       20,
       286
     );
 
     doc.setFont('helvetica','normal');
+    doc.setFontSize(6.5);
     doc.setTextColor(...muted);
+
     doc.text(
-      'Independent private service — NOT A GOVERNMENT DOCUMENT',
+      'PRIVATE SERVICE DOCUMENT — NOT A GOVERNMENT-ISSUED DOCUMENT',
       20,
-      291
+      292
     );
 
     doc.text(
-      'Application: ' + String(application.applicationNumber || ''),
+      'Application: ' + appNo,
       190,
-      291,
+      292,
       {align:'right'}
     );
 
-    /* ================================
-       DOWNLOAD
-    ================================= */
+
+    /* DOWNLOAD */
 
     const safeNumber =
-      String(application.applicationNumber || 'application')
-        .replace(/[^a-zA-Z0-9-_]/g,'_');
+      String(appNo)
+        .replace(
+          /[^a-zA-Z0-9-_]/g,
+          '_'
+        );
 
     doc.save(
+      'CANADA-AUSTRALIA-' +
       safeNumber +
       '-application.pdf'
     );
+
 
   }catch(error){
 

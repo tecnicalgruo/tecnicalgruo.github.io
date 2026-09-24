@@ -305,8 +305,7 @@ header{
   top:50%;
   transform:translate(-50%,-50%) rotate(-7deg);
   border-radius:20px;
-  background:
-    linear-gradient(145deg,#174c98,#092652);
+  background:linear-gradient(145deg,#174c98,#092652);
   border:1px solid rgba(255,255,255,.18);
   padding:24px;
   box-shadow:0 35px 70px rgba(0,0,0,.45);
@@ -1109,9 +1108,12 @@ footer a{
 
 <body>
 
-<!-- HEADER -->
+<!-- =====================================================
+     HEADER
+===================================================== -->
 
 <header>
+
   <div class="container nav">
 
     <a href="#" class="logo">
@@ -1135,10 +1137,13 @@ footer a{
     </button>
 
   </div>
+
 </header>
 
 
-<!-- HERO -->
+<!-- =====================================================
+     HERO
+===================================================== -->
 
 <section class="hero">
 
@@ -1225,7 +1230,9 @@ footer a{
 </section>
 
 
-<!-- SERVICES -->
+<!-- =====================================================
+     SERVICES
+===================================================== -->
 
 <section id="services">
 
@@ -1278,9 +1285,7 @@ footer a{
 
         <div class="service-card">
 
-          <div class="service-icon">
-            🧳
-          </div>
+          <div class="service-icon">🧳</div>
 
           <h4>Visitor Visa</h4>
 
@@ -1302,9 +1307,7 @@ footer a{
 
         <div class="service-card">
 
-          <div class="service-icon">
-            🎓
-          </div>
+          <div class="service-icon">🎓</div>
 
           <h4>Study Permit</h4>
 
@@ -1326,9 +1329,7 @@ footer a{
 
         <div class="service-card">
 
-          <div class="service-icon">
-            💼
-          </div>
+          <div class="service-icon">💼</div>
 
           <h4>Work Permit</h4>
 
@@ -1350,9 +1351,7 @@ footer a{
 
         <div class="service-card">
 
-          <div class="service-icon">
-            👨‍👩‍👧
-          </div>
+          <div class="service-icon">👨‍👩‍👧</div>
 
           <h4>Family / Other</h4>
 
@@ -1406,9 +1405,7 @@ footer a{
 
         <div class="service-card">
 
-          <div class="service-icon">
-            🧳
-          </div>
+          <div class="service-icon">🧳</div>
 
           <h4>Visitor Visa</h4>
 
@@ -1430,9 +1427,7 @@ footer a{
 
         <div class="service-card">
 
-          <div class="service-icon">
-            🎓
-          </div>
+          <div class="service-icon">🎓</div>
 
           <h4>Student Visa</h4>
 
@@ -1454,9 +1449,7 @@ footer a{
 
         <div class="service-card">
 
-          <div class="service-icon">
-            💼
-          </div>
+          <div class="service-icon">💼</div>
 
           <h4>Work / Skilled</h4>
 
@@ -1478,9 +1471,7 @@ footer a{
 
         <div class="service-card">
 
-          <div class="service-icon">
-            👨‍👩‍👧
-          </div>
+          <div class="service-icon">👨‍👩‍👧</div>
 
           <h4>Family / Other</h4>
 
@@ -1508,7 +1499,9 @@ footer a{
 </section>
 
 
-<!-- PROCESS -->
+<!-- =====================================================
+     PROCESS
+===================================================== -->
 
 <section id="process">
 
@@ -1572,7 +1565,9 @@ footer a{
 </section>
 
 
-<!-- TRACKING -->
+<!-- =====================================================
+     TRACKING
+===================================================== -->
 
 <section id="tracking" class="track-section">
 
@@ -1632,7 +1627,9 @@ footer a{
 </section>
 
 
-<!-- APPLICATION -->
+<!-- =====================================================
+     APPLICATION
+===================================================== -->
 
 <section id="apply">
 
@@ -1721,8 +1718,6 @@ footer a{
       <!-- FORM -->
 
       <div class="application-form">
-
-        <!-- PROGRESS -->
 
         <div class="form-progress">
 
@@ -2288,7 +2283,9 @@ footer a{
 </section>
 
 
-<!-- FAQ -->
+<!-- =====================================================
+     FAQ
+===================================================== -->
 
 <section id="faq">
 
@@ -2382,7 +2379,9 @@ footer a{
 </section>
 
 
-<!-- OFFICIAL LINKS -->
+<!-- =====================================================
+     OFFICIAL LINKS
+===================================================== -->
 
 <section>
 
@@ -2468,7 +2467,9 @@ footer a{
 </section>
 
 
-<!-- FOOTER -->
+<!-- =====================================================
+     FOOTER
+===================================================== -->
 
 <footer>
 
@@ -2509,7 +2510,11 @@ footer a{
           Contact
         </h4>
 
-        <a href="https://wa.me/12494771916" target="_blank">
+        <a
+          href="https://wa.me/12494771916"
+          target="_blank"
+          rel="noopener"
+        >
           WhatsApp
         </a>
 
@@ -2540,11 +2545,11 @@ footer a{
 </footer>
 
 
-<!-- SUPABASE -->
+<!-- =====================================================
+     LIBRARIES
+===================================================== -->
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<!-- jsPDF -->
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
@@ -2558,15 +2563,8 @@ footer a{
 const SUPABASE_URL =
   'https://enzdwufnufalmeimnccn.supabase.co';
 
-/*
- IMPORTANT:
- Paste your existing Supabase PUBLISHABLE key here.
- Do not use a service_role key in this frontend.
-*/
-
 const SUPABASE_PUBLISHABLE_KEY =
   'sb_publishable_qhjQqU0JgOGpcR4Qq3QVog_be3Ydhnu';
-
 
 const supabaseClient =
   window.supabase.createClient(
@@ -2596,7 +2594,6 @@ const menuBtn =
 const navLinks =
   document.getElementById('navLinks');
 
-
 menuBtn.addEventListener('click',()=>{
 
   const open =
@@ -2614,7 +2611,8 @@ menuBtn.addEventListener('click',()=>{
     navLinks.style.padding = '18px';
     navLinks.style.flexDirection = 'column';
     navLinks.style.background = '#091a33';
-    navLinks.style.border = '1px solid rgba(255,255,255,.1)';
+    navLinks.style.border =
+      '1px solid rgba(255,255,255,.1)';
     navLinks.style.borderRadius = '15px';
 
   }
@@ -2731,7 +2729,7 @@ function selectVisa(country,visa){
 
 
 /* =========================================================
-   FORM STEP VALIDATION
+   FORM VALIDATION
 ========================================================= */
 
 function getCurrentStepFields(){
@@ -2836,7 +2834,7 @@ function previousStep(){
 
 
 /* =========================================================
-   REVIEW
+   VALUE HELPERS
 ========================================================= */
 
 function value(id){
@@ -2860,6 +2858,10 @@ function buildDate(day,month,year){
 }
 
 
+/* =========================================================
+   REVIEW
+========================================================= */
+
 function buildReview(){
 
   const review =
@@ -2869,17 +2871,31 @@ function buildReview(){
 
     ['Country',value('country')],
     ['Visa Type',value('visa')],
-    ['Name',value('firstName')+' '+value('lastName')],
+    ['Name',
+      value('firstName')+' '+value('lastName')
+    ],
     ['Nationality',value('nationality')],
     ['Date of Birth',
-      buildDate('dobDay','dobMonth','dobYear')
+      buildDate(
+        'dobDay',
+        'dobMonth',
+        'dobYear'
+      )
     ],
     ['Passport Number',value('passport')],
     ['Passport Issue',
-      buildDate('issueDay','issueMonth','issueYear')
+      buildDate(
+        'issueDay',
+        'issueMonth',
+        'issueYear'
+      )
     ],
     ['Passport Expiry',
-      buildDate('expiryDay','expiryMonth','expiryYear')
+      buildDate(
+        'expiryDay',
+        'expiryMonth',
+        'expiryYear'
+      )
     ],
     ['Phone',value('phone')],
     ['Email',value('email')],
@@ -2946,19 +2962,14 @@ async function submitApplication(event){
 
   event.preventDefault();
 
-
   if(currentStep !== 4){
-
     return;
-
   }
-
 
   const button =
     document.getElementById(
       'submitButton'
     );
-
 
   button.disabled = true;
 
@@ -3129,6 +3140,10 @@ async function submitApplication(event){
       'none';
 
 
+    /* =====================================================
+       AUTO PDF
+    ===================================================== */
+
     try{
 
       generateApplicationPDF(
@@ -3137,7 +3152,10 @@ async function submitApplication(event){
 
     }catch(pdfError){
 
-      console.error(pdfError);
+      console.error(
+        'PDF Error:',
+        pdfError
+      );
 
     }
 
@@ -3158,6 +3176,8 @@ async function submitApplication(event){
 
 
   }catch(error){
+
+    console.error(error);
 
     alert(
       'Application could not be submitted.\n\n' +
@@ -3303,8 +3323,17 @@ async function checkApplicationStatus(){
       dateOfBirth:
         application.date_of_birth || '',
 
-      applicationDate:'',
-      currentAddress:'',
+      applicationDate:
+        '',
+
+      passportIssueDate:
+        application.passport_issue_date || '',
+
+      passportExpiryDate:
+        application.passport_expiry_date || '',
+
+      currentAddress:
+        application.current_address || ''
 
     };
 
@@ -3318,7 +3347,9 @@ async function checkApplicationStatus(){
           <div>
 
             <div class="status-name">
-              ${escapeHTML(applicantName || 'Applicant')}
+              ${escapeHTML(
+                applicantName || 'Applicant'
+              )}
             </div>
 
             <div class="status-number">
@@ -3346,7 +3377,9 @@ async function checkApplicationStatus(){
             </small>
 
             <strong>
-              ${escapeHTML(application.country || '-')}
+              ${escapeHTML(
+                application.country || '-'
+              )}
             </strong>
 
           </div>
@@ -3359,7 +3392,9 @@ async function checkApplicationStatus(){
             </small>
 
             <strong>
-              ${escapeHTML(application.visa_type || '-')}
+              ${escapeHTML(
+                application.visa_type || '-'
+              )}
             </strong>
 
           </div>
@@ -3372,7 +3407,9 @@ async function checkApplicationStatus(){
             </small>
 
             <strong>
-              ${escapeHTML(application.passport_number || '-')}
+              ${escapeHTML(
+                application.passport_number || '-'
+              )}
             </strong>
 
           </div>
@@ -3456,15 +3493,11 @@ function buildTimeline(status){
   let activeIndex = 0;
 
 
-  if(
-    normalized.includes('review')
-  ){
+  if(normalized.includes('review')){
     activeIndex = 1;
   }
 
-  if(
-    normalized.includes('process')
-  ){
+  if(normalized.includes('process')){
     activeIndex = 2;
   }
 
@@ -3473,7 +3506,9 @@ function buildTimeline(status){
     normalized.includes('approved') ||
     normalized.includes('decision')
   ){
+
     activeIndex = 3;
+
   }
 
 
@@ -3513,7 +3548,7 @@ function buildTimeline(status){
 
 
 /* =========================================================
-   PDF
+   PREMIUM PDF
 ========================================================= */
 
 function generateApplicationPDF(application){
@@ -3538,52 +3573,108 @@ function generateApplicationPDF(application){
 
   const doc =
     new jsPDF({
+      orientation:'portrait',
       unit:'mm',
       format:'a4'
     });
 
 
-  const navy =
-    [6,18,37];
-
-  const blue =
-    [37,99,255];
-
-  const gold =
-    [245,201,91];
-
-  const muted =
-    [100,115,135];
-
-
   const W = 210;
-
-  const left = 20;
-
-  const right = 190;
+  const H = 297;
 
 
-  /* BACKGROUND */
+  const navy = [6,18,37];
+  const navy2 = [9,26,51];
+  const blue = [37,99,255];
+  const gold = [245,201,91];
+  const goldLight = [255,224,138];
+  const text = [25,35,50];
+  const muted = [105,118,135];
+  const border = [220,225,232];
+  const green = [30,170,105];
+
+
+  const left = 18;
+  const right = 192;
+  const contentWidth = right-left;
+
+
+  /* =====================================================
+     PAGE
+  ===================================================== */
 
   doc.setFillColor(
-    255,255,255
+    250,251,253
   );
 
   doc.rect(
-    0,0,210,297,'F'
+    0,
+    0,
+    W,
+    H,
+    'F'
   );
 
 
-  /* HEADER */
+  /* =====================================================
+     HEADER
+  ===================================================== */
 
   doc.setFillColor(
     ...navy
   );
 
   doc.rect(
-    0,0,W,40,'F'
+    0,
+    0,
+    W,
+    52,
+    'F'
   );
 
+
+  /* decorative circles */
+
+  doc.setFillColor(
+    ...blue
+  );
+
+  doc.circle(
+    195,
+    8,
+    30,
+    'F'
+  );
+
+
+  doc.setFillColor(
+    ...navy2
+  );
+
+  doc.circle(
+    205,
+    42,
+    35,
+    'F'
+  );
+
+
+  /* gold line */
+
+  doc.setFillColor(
+    ...gold
+  );
+
+  doc.rect(
+    0,
+    49,
+    W,
+    3,
+    'F'
+  );
+
+
+  /* brand */
 
   doc.setTextColor(
     255,255,255
@@ -3594,26 +3685,12 @@ function generateApplicationPDF(application){
     'bold'
   );
 
-  doc.setFontSize(16);
+  doc.setFontSize(17);
 
   doc.text(
-    'CANADA & AUSTRALIA',
+    'CANADA',
     left,
-    15
-  );
-
-
-  doc.setFont(
-    'helvetica',
-    'normal'
-  );
-
-  doc.setFontSize(9);
-
-  doc.text(
-    'Visa Application & Assistance',
-    left,
-    22
+    18
   );
 
 
@@ -3621,32 +3698,21 @@ function generateApplicationPDF(application){
     ...gold
   );
 
-  doc.setFontSize(7);
-
   doc.text(
-    'PRIVATE APPLICATION CONFIRMATION',
-    left,
-    30
+    '&',
+    49,
+    18
   );
 
-
-  /* TITLE */
 
   doc.setTextColor(
-    ...navy
+    255,255,255
   );
-
-  doc.setFont(
-    'helvetica',
-    'bold'
-  );
-
-  doc.setFontSize(15);
 
   doc.text(
-    'Application Confirmation',
-    left,
-    55
+    'AUSTRALIA',
+    57,
+    18
   );
 
 
@@ -3655,47 +3721,42 @@ function generateApplicationPDF(application){
     'normal'
   );
 
-  doc.setFontSize(9);
+  doc.setFontSize(8);
 
   doc.setTextColor(
-    ...muted
+    190,205,225
   );
 
   doc.text(
-    application.applicationDate || '',
+    'VISA APPLICATION & ASSISTANCE',
     left,
-    62
-  );
-
-
-  /* APPLICATION NUMBER */
-
-  doc.setFillColor(
-    247,249,252
-  );
-
-  doc.roundedRect(
-    20,
-    72,
-    170,
-    24,
-    3,
-    3,
-    'F'
+    27
   );
 
 
   doc.setTextColor(
-    ...muted
+    ...goldLight
+  );
+
+  doc.setFont(
+    'helvetica',
+    'bold'
   );
 
   doc.setFontSize(7);
 
   doc.text(
-    'APPLICATION NUMBER',
-    27,
-    81
+    'PRIVATE APPLICATION CONFIRMATION',
+    left,
+    38
   );
+
+
+  /* =====================================================
+     TITLE
+  ===================================================== */
+
+  let y = 67;
 
 
   doc.setTextColor(
@@ -3707,25 +3768,211 @@ function generateApplicationPDF(application){
     'bold'
   );
 
-  doc.setFontSize(14);
+  doc.setFontSize(21);
 
   doc.text(
-    application.applicationNumber || '',
-    27,
-    90
+    'Application Confirmation',
+    left,
+    y
   );
 
 
-  /* DETAILS */
+  y += 7;
 
-  let y = 110;
+
+  doc.setFont(
+    'helvetica',
+    'normal'
+  );
+
+  doc.setFontSize(8.5);
+
+  doc.setTextColor(
+    ...muted
+  );
+
+  doc.text(
+    'Thank you for submitting your application request.',
+    left,
+    y
+  );
+
+
+  /* =====================================================
+     APPLICATION NUMBER
+  ===================================================== */
+
+  y = 82;
+
+
+  doc.setFillColor(
+    ...navy
+  );
+
+  doc.roundedRect(
+    left,
+    y,
+    contentWidth,
+    31,
+    5,
+    5,
+    'F'
+  );
+
+
+  doc.setFillColor(
+    ...gold
+  );
+
+  doc.roundedRect(
+    left,
+    y,
+    4,
+    31,
+    2,
+    2,
+    'F'
+  );
+
+
+  doc.setTextColor(
+    180,195,215
+  );
+
+  doc.setFont(
+    'helvetica',
+    'bold'
+  );
+
+  doc.setFontSize(7);
+
+  doc.text(
+    'APPLICATION NUMBER',
+    left+11,
+    y+10
+  );
+
+
+  doc.setTextColor(
+    255,255,255
+  );
+
+  doc.setFont(
+    'helvetica',
+    'bold'
+  );
+
+  doc.setFontSize(17);
+
+  doc.text(
+    application.applicationNumber || '-',
+    left+11,
+    y+21
+  );
+
+
+  /* status */
+
+  const status =
+    application.status || 'New';
+
+
+  doc.setFillColor(
+    ...green
+  );
+
+  doc.roundedRect(
+    151,
+    y+9,
+    30,
+    10,
+    5,
+    5,
+    'F'
+  );
+
+
+  doc.setTextColor(
+    255,255,255
+  );
+
+  doc.setFont(
+    'helvetica',
+    'bold'
+  );
+
+  doc.setFontSize(6.5);
+
+  doc.text(
+    status.toUpperCase(),
+    166,
+    y+15.5,
+    {
+      align:'center'
+    }
+  );
+
+
+  /* =====================================================
+     DATE
+  ===================================================== */
+
+  y = 126;
+
+
+  doc.setFont(
+    'helvetica',
+    'normal'
+  );
+
+  doc.setFontSize(8);
+
+  doc.setTextColor(
+    ...muted
+  );
+
+  doc.text(
+    'APPLICATION DATE',
+    left,
+    y
+  );
+
+
+  doc.setTextColor(
+    ...text
+  );
+
+  doc.setFont(
+    'helvetica',
+    'bold'
+  );
+
+  doc.setFontSize(9);
+
+  doc.text(
+    application.applicationDate || '-',
+    left,
+    y+6
+  );
+
+
+  /* =====================================================
+     SECTION TITLE
+  ===================================================== */
+
+  y = 146;
 
 
   doc.setTextColor(
     ...navy
   );
 
-  doc.setFontSize(11);
+  doc.setFont(
+    'helvetica',
+    'bold'
+  );
+
+  doc.setFontSize(13);
 
   doc.text(
     'Applicant Information',
@@ -3734,54 +3981,138 @@ function generateApplicationPDF(application){
   );
 
 
-  y += 10;
+  doc.setFillColor(
+    ...gold
+  );
+
+  doc.roundedRect(
+    left,
+    y+4,
+    24,
+    1.5,
+    .7,
+    .7,
+    'F'
+  );
+
+
+  /* =====================================================
+     INFORMATION CARDS
+  ===================================================== */
+
+  y += 15;
 
 
   const rows = [
 
-    ['Applicant',
-      application.applicantName],
+    [
+      'Applicant Name',
+      application.applicantName
+    ],
 
-    ['Country',
-      application.country],
+    [
+      'Country',
+      application.country
+    ],
 
-    ['Visa Type',
-      application.visaType],
+    [
+      'Visa / Application Type',
+      application.visaType
+    ],
 
-    ['Nationality',
-      application.nationality],
+    [
+      'Nationality',
+      application.nationality
+    ],
 
-    ['Date of Birth',
-      application.dateOfBirth],
+    [
+      'Date of Birth',
+      application.dateOfBirth
+    ],
 
-    ['Passport Number',
-      application.passportNumber],
+    [
+      'Passport Number',
+      application.passportNumber
+    ],
 
-    ['Passport Issue Date',
-      application.passportIssueDate],
+    [
+      'Passport Issue Date',
+      application.passportIssueDate
+    ],
 
-    ['Passport Expiry Date',
-      application.passportExpiryDate],
-
-    ['Current Status',
-      application.status]
+    [
+      'Passport Expiry Date',
+      application.passportExpiryDate
+    ]
 
   ];
 
 
-  rows.forEach(row=>{
+  const boxHeight = 15;
+  const gap = 5;
+
+
+  rows.forEach((row,index)=>{
+
+    const col =
+      index % 2;
+
+    const rowIndex =
+      Math.floor(index / 2);
+
+    const x =
+      left +
+      col * (84 + gap);
+
+    const yy =
+      y +
+      rowIndex * (
+        boxHeight + gap
+      );
+
+
+    doc.setFillColor(
+      255,255,255
+    );
 
     doc.setDrawColor(
-      220,224,230
+      ...border
     );
 
-    doc.line(
-      left,
-      y+4,
-      right,
-      y+4
+
+    doc.roundedRect(
+      x,
+      yy,
+      84,
+      boxHeight,
+      3,
+      3,
+      'FD'
     );
 
+
+    doc.setTextColor(
+      ...muted
+    );
+
+    doc.setFont(
+      'helvetica',
+      'normal'
+    );
+
+    doc.setFontSize(6.5);
+
+
+    doc.text(
+      row[0].toUpperCase(),
+      x+6,
+      yy+6
+    );
+
+
+    doc.setTextColor(
+      ...text
+    );
 
     doc.setFont(
       'helvetica',
@@ -3790,57 +4121,136 @@ function generateApplicationPDF(application){
 
     doc.setFontSize(8);
 
-    doc.setTextColor(
-      75,85,100
-    );
+
+    const displayValue =
+      String(row[1] || '-');
+
+
+    const lines =
+      doc.splitTextToSize(
+        displayValue,
+        72
+      );
+
 
     doc.text(
-      row[0],
-      left+2,
-      y
+      lines[0],
+      x+6,
+      yy+11
     );
-
-
-    doc.setFont(
-      'helvetica',
-      'normal'
-    );
-
-    doc.setTextColor(
-      ...navy
-    );
-
-    doc.text(
-      String(row[1] || '-'),
-      90,
-      y
-    );
-
-
-    y += 8;
 
   });
 
 
-  /* NOTICE */
+  /* =====================================================
+     ADDRESS
+  ===================================================== */
 
-  y += 8;
+  y +=
+    4 * (boxHeight + gap) +
+    3;
 
 
   doc.setFillColor(
-    247,249,252
+    255,255,255
   );
+
+  doc.setDrawColor(
+    ...border
+  );
+
 
   doc.roundedRect(
     left,
     y,
-    170,
-    48,
+    contentWidth,
+    23,
     3,
     3,
-    'F'
+    'FD'
   );
 
+
+  doc.setTextColor(
+    ...muted
+  );
+
+  doc.setFont(
+    'helvetica',
+    'normal'
+  );
+
+  doc.setFontSize(6.5);
+
+
+  doc.text(
+    'CURRENT ADDRESS',
+    left+6,
+    y+7
+  );
+
+
+  doc.setTextColor(
+    ...text
+  );
+
+  doc.setFont(
+    'helvetica',
+    'normal'
+  );
+
+  doc.setFontSize(8);
+
+
+  const addressLines =
+    doc.splitTextToSize(
+      String(
+        application.currentAddress ||
+        '-'
+      ),
+      contentWidth-12
+    );
+
+
+  doc.text(
+    addressLines.slice(0,2),
+    left+6,
+    y+14
+  );
+
+
+  /* =====================================================
+     IMPORTANT NOTICE
+  ===================================================== */
+
+  y += 34;
+
+
+  doc.setFillColor(
+    255,
+    248,
+    226
+  );
+
+  doc.setDrawColor(
+    ...gold
+  );
+
+
+  doc.roundedRect(
+    left,
+    y,
+    contentWidth,
+    42,
+    4,
+    4,
+    'FD'
+  );
+
+
+  doc.setTextColor(
+    ...navy
+  );
 
   doc.setFont(
     'helvetica',
@@ -3849,16 +4259,19 @@ function generateApplicationPDF(application){
 
   doc.setFontSize(9);
 
-  doc.setTextColor(
-    ...navy
-  );
 
   doc.text(
     'Important Information',
-    left+6,
-    y+9
+    left+7,
+    y+10
   );
 
+
+  doc.setTextColor(
+    82,
+    91,
+    105
+  );
 
   doc.setFont(
     'helvetica',
@@ -3867,63 +4280,122 @@ function generateApplicationPDF(application){
 
   doc.setFontSize(7);
 
-  doc.setTextColor(
-    ...muted
-  );
-
 
   const notice =
-    'This document confirms receipt of an application or assistance request submitted through CANADA & AUSTRALIA Visa Application & Assistance. This is an independent private service document and is not issued by a government immigration authority. Visa decisions are made by the relevant government authority.';
+    'This document confirms receipt of an application or assistance request submitted through CANADA & AUSTRALIA Visa Application & Assistance. This is an independent private service and is not issued by a government immigration authority. Visa or immigration decisions are made solely by the relevant government authority. Submission of this application does not guarantee visa approval.';
 
 
-  const lines =
+  const noticeLines =
     doc.splitTextToSize(
       notice,
-      158
+      contentWidth-14
     );
 
 
   doc.text(
-    lines,
-    left+6,
-    y+18
+    noticeLines,
+    left+7,
+    y+19
   );
 
 
-  /* FOOTER */
+  /* =====================================================
+     FOOTER
+  ===================================================== */
 
   doc.setDrawColor(
-    210,215,222
+    ...border
   );
 
   doc.line(
-    20,
-    278,
-    190,
-    278
+    left,
+    273,
+    right,
+    273
   );
 
 
+  doc.setFont(
+    'helvetica',
+    'bold'
+  );
+
   doc.setFontSize(6.5);
+
+  doc.setTextColor(
+    ...navy
+  );
+
+
+  doc.text(
+    'CANADA & AUSTRALIA',
+    left,
+    282
+  );
+
+
+  doc.setFont(
+    'helvetica',
+    'normal'
+  );
 
   doc.setTextColor(
     ...muted
   );
 
+
   doc.text(
-    'PRIVATE SERVICE DOCUMENT — NOT GOVERNMENT ISSUED',
-    20,
-    286
+    'Independent Visa Application & Assistance',
+    left,
+    288
+  );
+
+
+  doc.setFont(
+    'helvetica',
+    'bold'
+  );
+
+  doc.setTextColor(
+    ...gold
   );
 
 
   doc.text(
     application.applicationNumber || '',
-    190,
-    286,
-    {align:'right'}
+    right,
+    282,
+    {
+      align:'right'
+    }
   );
 
+
+  doc.setFont(
+    'helvetica',
+    'normal'
+  );
+
+  doc.setFontSize(6);
+
+  doc.setTextColor(
+    ...muted
+  );
+
+
+  doc.text(
+    'PRIVATE SERVICE DOCUMENT — NOT GOVERNMENT ISSUED',
+    right,
+    288,
+    {
+      align:'right'
+    }
+  );
+
+
+  /* =====================================================
+     SAVE PDF AUTOMATICALLY
+  ===================================================== */
 
   const safe =
     String(

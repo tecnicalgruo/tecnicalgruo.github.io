@@ -822,11 +822,122 @@ textarea{
   margin-top:25px;
 }
 
+/* PHOTO UPLOAD */
+
+.photo-upload-box{
+  margin-top:22px;
+  padding:20px;
+  border:1px dashed rgba(245,201,91,.35);
+  border-radius:18px;
+  background:rgba(245,201,91,.035);
+}
+
+.photo-upload-content{
+  display:flex;
+  gap:20px;
+  align-items:center;
+}
+
+.photo-preview{
+  width:105px;
+  height:125px;
+  border-radius:10px;
+  border:1px solid rgba(255,255,255,.15);
+  background:#07162b;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  flex-shrink:0;
+}
+
+.photo-preview img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:none;
+}
+
+.photo-placeholder{
+  text-align:center;
+  color:#61738e;
+  font-size:11px;
+  padding:8px;
+}
+
+.photo-upload-text{
+  flex:1;
+}
+
+.photo-upload-text h4{
+  font-size:15px;
+  margin-bottom:5px;
+}
+
+.photo-upload-text p{
+  color:var(--muted);
+  font-size:11px;
+  margin-bottom:12px;
+}
+
+.photo-upload-label{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:42px;
+  padding:0 15px;
+  border-radius:11px;
+  background:var(--blue);
+  color:white;
+  font-size:12px;
+  font-weight:800;
+  cursor:pointer;
+}
+
+.photo-upload-label:hover{
+  background:var(--blue2);
+}
+
+.photo-upload-input{
+  display:none;
+}
+
+.photo-status{
+  margin-top:9px;
+  color:var(--success);
+  font-size:11px;
+  display:none;
+}
+
+/* REVIEW */
+
 .review-box{
   padding:20px;
   border:1px solid var(--line);
   border-radius:15px;
   background:#07162b;
+}
+
+.review-photo-row{
+  display:flex;
+  gap:18px;
+  align-items:center;
+  padding-bottom:18px;
+  margin-bottom:12px;
+  border-bottom:1px solid var(--line);
+}
+
+.review-photo{
+  width:80px;
+  height:95px;
+  object-fit:cover;
+  border-radius:8px;
+  border:1px solid rgba(245,201,91,.35);
+}
+
+.review-photo-label{
+  color:var(--muted);
+  font-size:11px;
 }
 
 .review-row{
@@ -1102,18 +1213,18 @@ footer a{
   .date-grid{
     grid-template-columns:1fr;
   }
+
+  .photo-upload-content{
+    flex-direction:column;
+    align-items:flex-start;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<!-- =====================================================
-     HEADER
-===================================================== -->
-
 <header>
-
   <div class="container nav">
 
     <a href="#" class="logo">
@@ -1137,13 +1248,8 @@ footer a{
     </button>
 
   </div>
-
 </header>
 
-
-<!-- =====================================================
-     HERO
-===================================================== -->
 
 <section class="hero">
 
@@ -1191,7 +1297,7 @@ footer a{
         </div>
 
         <div class="trust-item">
-          ✓ PDF Confirmation
+          ✓ Photo + PDF
         </div>
 
       </div>
@@ -1230,10 +1336,6 @@ footer a{
 </section>
 
 
-<!-- =====================================================
-     SERVICES
-===================================================== -->
-
 <section id="services">
 
   <div class="container">
@@ -1254,8 +1356,6 @@ footer a{
 
     </div>
 
-
-    <!-- CANADA -->
 
     <div class="country">
 
@@ -1284,98 +1384,49 @@ footer a{
       <div class="service-grid">
 
         <div class="service-card">
-
           <div class="service-icon">🧳</div>
-
           <h4>Visitor Visa</h4>
-
-          <p>
-            Assistance for temporary visits,
-            tourism and family visits.
-          </p>
-
-          <a
-            href="#apply"
-            class="service-link"
-            onclick="selectVisa('Canada','Visitor Visa')"
-          >
+          <p>Assistance for temporary visits, tourism and family visits.</p>
+          <a href="#apply" class="service-link"
+             onclick="selectVisa('Canada','Visitor Visa')">
             Start Application →
           </a>
-
         </div>
 
-
         <div class="service-card">
-
           <div class="service-icon">🎓</div>
-
           <h4>Study Permit</h4>
-
-          <p>
-            Application intake assistance for
-            eligible study plans.
-          </p>
-
-          <a
-            href="#apply"
-            class="service-link"
-            onclick="selectVisa('Canada','Study Permit')"
-          >
+          <p>Application intake assistance for eligible study plans.</p>
+          <a href="#apply" class="service-link"
+             onclick="selectVisa('Canada','Study Permit')">
             Start Application →
           </a>
-
         </div>
 
-
         <div class="service-card">
-
           <div class="service-icon">💼</div>
-
           <h4>Work Permit</h4>
-
-          <p>
-            Assistance for applicants planning
-            to work in Canada.
-          </p>
-
-          <a
-            href="#apply"
-            class="service-link"
-            onclick="selectVisa('Canada','Work Permit')"
-          >
+          <p>Assistance for applicants planning to work in Canada.</p>
+          <a href="#apply" class="service-link"
+             onclick="selectVisa('Canada','Work Permit')">
             Start Application →
           </a>
-
         </div>
 
-
         <div class="service-card">
-
           <div class="service-icon">👨‍👩‍👧</div>
-
           <h4>Family / Other</h4>
-
-          <p>
-            Tell us about your application and
-            receive next-step guidance.
-          </p>
-
-          <a
-            href="#apply"
-            class="service-link"
-            onclick="selectVisa('Canada','Family / Other')"
-          >
+          <p>Tell us about your application and receive next-step guidance.</p>
+          <a href="#apply" class="service-link"
+             onclick="selectVisa('Canada','Family / Other')">
             Start Application →
           </a>
-
         </div>
 
       </div>
 
     </div>
 
-
-    <!-- AUSTRALIA -->
 
     <div class="country">
 
@@ -1404,90 +1455,43 @@ footer a{
       <div class="service-grid">
 
         <div class="service-card">
-
           <div class="service-icon">🧳</div>
-
           <h4>Visitor Visa</h4>
-
-          <p>
-            Assistance for temporary travel
-            and visitor applications.
-          </p>
-
-          <a
-            href="#apply"
-            class="service-link"
-            onclick="selectVisa('Australia','Visitor Visa')"
-          >
+          <p>Assistance for temporary travel and visitor applications.</p>
+          <a href="#apply" class="service-link"
+             onclick="selectVisa('Australia','Visitor Visa')">
             Start Application →
           </a>
-
         </div>
 
-
         <div class="service-card">
-
           <div class="service-icon">🎓</div>
-
           <h4>Student Visa</h4>
-
-          <p>
-            Application intake assistance for
-            study-related applications.
-          </p>
-
-          <a
-            href="#apply"
-            class="service-link"
-            onclick="selectVisa('Australia','Student Visa')"
-          >
+          <p>Application intake assistance for study-related applications.</p>
+          <a href="#apply" class="service-link"
+             onclick="selectVisa('Australia','Student Visa')">
             Start Application →
           </a>
-
         </div>
 
-
         <div class="service-card">
-
           <div class="service-icon">💼</div>
-
           <h4>Work / Skilled</h4>
-
-          <p>
-            Assistance for employment and
-            skilled migration enquiries.
-          </p>
-
-          <a
-            href="#apply"
-            class="service-link"
-            onclick="selectVisa('Australia','Work / Skilled')"
-          >
+          <p>Assistance for employment and skilled migration enquiries.</p>
+          <a href="#apply" class="service-link"
+             onclick="selectVisa('Australia','Work / Skilled')">
             Start Application →
           </a>
-
         </div>
 
-
         <div class="service-card">
-
           <div class="service-icon">👨‍👩‍👧</div>
-
           <h4>Family / Other</h4>
-
-          <p>
-            Submit your details for a review
-            of your application needs.
-          </p>
-
-          <a
-            href="#apply"
-            class="service-link"
-            onclick="selectVisa('Australia','Family / Other')"
-          >
+          <p>Submit your details for a review of your application needs.</p>
+          <a href="#apply" class="service-link"
+             onclick="selectVisa('Australia','Family / Other')">
             Start Application →
           </a>
-
         </div>
 
       </div>
@@ -1499,10 +1503,6 @@ footer a{
 </section>
 
 
-<!-- =====================================================
-     PROCESS
-===================================================== -->
-
 <section id="process">
 
   <div class="container">
@@ -1513,9 +1513,7 @@ footer a{
         Simple Process
       </div>
 
-      <h2>
-        How it works
-      </h2>
+      <h2>How it works</h2>
 
       <p>
         A simple application intake process from start to next steps.
@@ -1529,33 +1527,25 @@ footer a{
       <div class="process-card">
         <div class="process-number">01</div>
         <h3>Choose</h3>
-        <p>
-          Select your destination and application category.
-        </p>
+        <p>Select your destination and application category.</p>
       </div>
 
       <div class="process-card">
         <div class="process-number">02</div>
         <h3>Submit</h3>
-        <p>
-          Complete the online application intake form.
-        </p>
+        <p>Complete the online application intake form.</p>
       </div>
 
       <div class="process-card">
         <div class="process-number">03</div>
         <h3>Review</h3>
-        <p>
-          Your submitted information can be reviewed for next-step assistance.
-        </p>
+        <p>Your submitted information can be reviewed for next-step assistance.</p>
       </div>
 
       <div class="process-card">
         <div class="process-number">04</div>
         <h3>Track</h3>
-        <p>
-          Keep your application number and use the tracking section.
-        </p>
+        <p>Keep your application number and use the tracking section.</p>
       </div>
 
     </div>
@@ -1564,10 +1554,6 @@ footer a{
 
 </section>
 
-
-<!-- =====================================================
-     TRACKING
-===================================================== -->
 
 <section id="tracking" class="track-section">
 
@@ -1579,9 +1565,7 @@ footer a{
         Application Tracking
       </div>
 
-      <h2>
-        Track your application
-      </h2>
+      <h2>Track your application</h2>
 
       <p>
         Enter your application number to check the latest available status.
@@ -1615,10 +1599,7 @@ footer a{
 
       </div>
 
-      <div
-        id="statusResult"
-        class="status-result"
-      ></div>
+      <div id="statusResult" class="status-result"></div>
 
     </div>
 
@@ -1626,10 +1607,6 @@ footer a{
 
 </section>
 
-
-<!-- =====================================================
-     APPLICATION
-===================================================== -->
 
 <section id="apply">
 
@@ -1641,9 +1618,7 @@ footer a{
         Online Application
       </div>
 
-      <h2>
-        Start your application
-      </h2>
+      <h2>Start your application</h2>
 
       <p>
         Complete the form step by step. Your application number
@@ -1656,17 +1631,13 @@ footer a{
     <div class="application-grid">
 
 
-      <!-- INFO -->
-
       <aside class="application-info">
 
         <div class="eyebrow">
           CANADA & AUSTRALIA
         </div>
 
-        <h3>
-          Ready to begin?
-        </h3>
+        <h3>Ready to begin?</h3>
 
         <p>
           Complete your basic information and submit your
@@ -1675,28 +1646,16 @@ footer a{
 
 
         <div class="contact-box">
-
           📱 <strong>WhatsApp</strong>
-
           <br>
-
-          <span>
-            +1 249 477 1916
-          </span>
-
+          <span>+1 249 477 1916</span>
         </div>
 
 
         <div class="contact-box">
-
           🌐 <strong>Service</strong>
-
           <br>
-
-          <span>
-            Visa Application Assistance
-          </span>
-
+          <span>Visa Application Assistance</span>
         </div>
 
 
@@ -1715,65 +1674,43 @@ footer a{
       </aside>
 
 
-      <!-- FORM -->
-
       <div class="application-form">
 
         <div class="form-progress">
 
-          <div
-            class="progress-step active"
-            data-progress="1"
-          >
+          <div class="progress-step active" data-progress="1">
             <div class="progress-circle">1</div>
           </div>
 
           <div class="progress-line"></div>
 
-          <div
-            class="progress-step"
-            data-progress="2"
-          >
+          <div class="progress-step" data-progress="2">
             <div class="progress-circle">2</div>
           </div>
 
           <div class="progress-line"></div>
 
-          <div
-            class="progress-step"
-            data-progress="3"
-          >
+          <div class="progress-step" data-progress="3">
             <div class="progress-circle">3</div>
           </div>
 
           <div class="progress-line"></div>
 
-          <div
-            class="progress-step"
-            data-progress="4"
-          >
+          <div class="progress-step" data-progress="4">
             <div class="progress-circle">4</div>
           </div>
 
         </div>
 
 
-        <form
-          id="applicationForm"
-          onsubmit="submitApplication(event)"
-        >
+        <form id="applicationForm" onsubmit="submitApplication(event)">
 
 
           <!-- STEP 1 -->
 
-          <div
-            class="form-step active"
-            data-step="1"
-          >
+          <div class="form-step active" data-step="1">
 
-            <h3>
-              Destination & visa
-            </h3>
+            <h3>Destination & visa</h3>
 
             <p class="form-step-description">
               Select where you are planning to apply.
@@ -1784,9 +1721,7 @@ footer a{
 
               <div class="field">
 
-                <label>
-                  Country *
-                </label>
+                <label>Country *</label>
 
                 <select
                   id="country"
@@ -1794,9 +1729,7 @@ footer a{
                   onchange="updateVisaOptions()"
                 >
 
-                  <option value="">
-                    Select country
-                  </option>
+                  <option value="">Select country</option>
 
                   <option value="Canada">
                     Canada
@@ -1813,14 +1746,9 @@ footer a{
 
               <div class="field">
 
-                <label>
-                  Visa / Application Type *
-                </label>
+                <label>Visa / Application Type *</label>
 
-                <select
-                  id="visa"
-                  required
-                >
+                <select id="visa" required>
 
                   <option value="">
                     Select type
@@ -1850,14 +1778,9 @@ footer a{
 
           <!-- STEP 2 -->
 
-          <div
-            class="form-step"
-            data-step="2"
-          >
+          <div class="form-step" data-step="2">
 
-            <h3>
-              Personal information
-            </h3>
+            <h3>Personal information</h3>
 
             <p class="form-step-description">
               Enter your personal details exactly as they appear
@@ -1869,9 +1792,7 @@ footer a{
 
               <div class="field">
 
-                <label>
-                  First Name *
-                </label>
+                <label>First Name *</label>
 
                 <input
                   id="firstName"
@@ -1884,9 +1805,7 @@ footer a{
 
               <div class="field">
 
-                <label>
-                  Last Name *
-                </label>
+                <label>Last Name *</label>
 
                 <input
                   id="lastName"
@@ -1899,9 +1818,7 @@ footer a{
 
               <div class="field">
 
-                <label>
-                  Nationality *
-                </label>
+                <label>Nationality *</label>
 
                 <input
                   id="nationality"
@@ -1914,9 +1831,7 @@ footer a{
 
               <div class="field">
 
-                <label>
-                  Phone / WhatsApp *
-                </label>
+                <label>Phone / WhatsApp *</label>
 
                 <input
                   id="phone"
@@ -1929,9 +1844,7 @@ footer a{
 
               <div class="field">
 
-                <label>
-                  Email Address *
-                </label>
+                <label>Email Address *</label>
 
                 <input
                   id="email"
@@ -1945,9 +1858,7 @@ footer a{
 
               <div class="field">
 
-                <label>
-                  Date of Birth *
-                </label>
+                <label>Date of Birth *</label>
 
                 <div class="date-grid">
 
@@ -1982,6 +1893,72 @@ footer a{
             </div>
 
 
+            <!-- PHOTO UPLOAD -->
+
+            <div class="photo-upload-box">
+
+              <div class="photo-upload-content">
+
+                <div class="photo-preview">
+
+                  <img
+                    id="photoPreview"
+                    alt="Passport Photo Preview"
+                  >
+
+                  <div
+                    id="photoPlaceholder"
+                    class="photo-placeholder"
+                  >
+                    📷<br>
+                    Passport Photo
+                  </div>
+
+                </div>
+
+
+                <div class="photo-upload-text">
+
+                  <h4>
+                    Passport Size Photo *
+                  </h4>
+
+                  <p>
+                    Upload a clear JPG or PNG passport-size photo.
+                    The photo will be added directly to your PDF.
+                    It will not be saved in the database.
+                  </p>
+
+                  <label
+                    for="passportPhoto"
+                    class="photo-upload-label"
+                  >
+                    Choose Photo
+                  </label>
+
+                  <input
+                    id="passportPhoto"
+                    class="photo-upload-input"
+                    type="file"
+                    accept="image/jpeg,image/png"
+                    required
+                    onchange="handlePhotoUpload(event)"
+                  >
+
+                  <div
+                    id="photoStatus"
+                    class="photo-status"
+                  >
+                    ✓ Photo selected successfully
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
             <div class="form-buttons">
 
               <button
@@ -2007,14 +1984,9 @@ footer a{
 
           <!-- STEP 3 -->
 
-          <div
-            class="form-step"
-            data-step="3"
-          >
+          <div class="form-step" data-step="3">
 
-            <h3>
-              Passport & address
-            </h3>
+            <h3>Passport & address</h3>
 
             <p class="form-step-description">
               Provide your passport and current address details.
@@ -2025,9 +1997,7 @@ footer a{
 
               <div class="field full">
 
-                <label>
-                  Passport Number *
-                </label>
+                <label>Passport Number *</label>
 
                 <input
                   id="passport"
@@ -2040,9 +2010,7 @@ footer a{
 
               <div class="field full">
 
-                <label>
-                  Passport Issue Date *
-                </label>
+                <label>Passport Issue Date *</label>
 
                 <div class="date-grid">
 
@@ -2077,9 +2045,7 @@ footer a{
 
               <div class="field full">
 
-                <label>
-                  Passport Expiry Date *
-                </label>
+                <label>Passport Expiry Date *</label>
 
                 <div class="date-grid">
 
@@ -2114,9 +2080,7 @@ footer a{
 
               <div class="field full">
 
-                <label>
-                  Current Address *
-                </label>
+                <label>Current Address *</label>
 
                 <input
                   id="address"
@@ -2129,9 +2093,7 @@ footer a{
 
               <div class="field full">
 
-                <label>
-                  Message
-                </label>
+                <label>Message</label>
 
                 <textarea
                   id="message"
@@ -2168,24 +2130,16 @@ footer a{
 
           <!-- STEP 4 -->
 
-          <div
-            class="form-step"
-            data-step="4"
-          >
+          <div class="form-step" data-step="4">
 
-            <h3>
-              Review & submit
-            </h3>
+            <h3>Review & submit</h3>
 
             <p class="form-step-description">
               Check your information before submitting.
             </p>
 
 
-            <div
-              id="reviewBox"
-              class="review-box"
-            ></div>
+            <div id="reviewBox" class="review-box"></div>
 
 
             <div class="notice">
@@ -2212,7 +2166,7 @@ footer a{
                 type="submit"
                 class="btn gold"
               >
-                Submit Application →
+                Submit & Download PDF →
               </button>
 
             </div>
@@ -2224,22 +2178,19 @@ footer a{
 
         <!-- SUCCESS -->
 
-        <div
-          id="applicationSuccess"
-          class="application-success"
-        >
+        <div id="applicationSuccess" class="application-success">
 
           <div class="success-icon">
             ✓
           </div>
 
           <h3>
-            Application submitted
+            Application submitted successfully
           </h3>
 
           <p>
-            Your application information has been submitted
-            successfully.
+            Your application information has been submitted.
+            Your PDF confirmation has also been generated.
           </p>
 
           <div
@@ -2260,7 +2211,7 @@ footer a{
               class="btn gold"
               onclick="downloadApplicationPDF()"
             >
-              Download PDF
+              Download PDF Again
             </button>
 
             <a
@@ -2283,10 +2234,6 @@ footer a{
 </section>
 
 
-<!-- =====================================================
-     FAQ
-===================================================== -->
-
 <section id="faq">
 
   <div class="container">
@@ -2297,9 +2244,7 @@ footer a{
         FAQ
       </div>
 
-      <h2>
-        Frequently asked questions
-      </h2>
+      <h2>Frequently asked questions</h2>
 
       <p>
         Some common questions about our application assistance service.
@@ -2311,10 +2256,7 @@ footer a{
     <div class="faq">
 
       <details>
-        <summary>
-          Is this a government website?
-        </summary>
-
+        <summary>Is this a government website?</summary>
         <p>
           No. This website provides independent private
           application-assistance/intake services. It is not
@@ -2324,10 +2266,7 @@ footer a{
 
 
       <details>
-        <summary>
-          Does submitting this form guarantee a visa?
-        </summary>
-
+        <summary>Does submitting this form guarantee a visa?</summary>
         <p>
           No. Visa or immigration decisions are made by the
           relevant government authority. Submission of an
@@ -2337,10 +2276,7 @@ footer a{
 
 
       <details>
-        <summary>
-          How can I track my application?
-        </summary>
-
+        <summary>How can I track my application?</summary>
         <p>
           After submission, you receive an application number.
           Enter that number in the Track Application section.
@@ -2349,10 +2285,17 @@ footer a{
 
 
       <details>
-        <summary>
-          Can I check official government information?
-        </summary>
+        <summary>Is my passport photo saved?</summary>
+        <p>
+          No. The uploaded photo is kept temporarily in the
+          browser and embedded into the generated PDF. It is
+          not inserted into the Supabase database by this code.
+        </p>
+      </details>
 
+
+      <details>
+        <summary>Can I check official government information?</summary>
         <p>
           Yes. We recommend checking the official government
           websites for current eligibility, fees, documents,
@@ -2362,10 +2305,7 @@ footer a{
 
 
       <details>
-        <summary>
-          Can I contact you through WhatsApp?
-        </summary>
-
+        <summary>Can I contact you through WhatsApp?</summary>
         <p>
           Yes. Our current WhatsApp contact is
           +1 249 477 1916.
@@ -2379,10 +2319,6 @@ footer a{
 </section>
 
 
-<!-- =====================================================
-     OFFICIAL LINKS
-===================================================== -->
-
 <section>
 
   <div class="container">
@@ -2393,9 +2329,7 @@ footer a{
         Official Resources
       </div>
 
-      <h2>
-        Government information
-      </h2>
+      <h2>Government information</h2>
 
       <p>
         Always verify current visa requirements with the relevant
@@ -2413,9 +2347,7 @@ footer a{
           🇨🇦
         </div>
 
-        <h3>
-          Government of Canada
-        </h3>
+        <h3>Government of Canada</h3>
 
         <p>
           Official IRCC information, application management,
@@ -2440,9 +2372,7 @@ footer a{
           🇦🇺
         </div>
 
-        <h3>
-          Australian Home Affairs
-        </h3>
+        <h3>Australian Home Affairs</h3>
 
         <p>
           Official Australian visa application and
@@ -2467,10 +2397,6 @@ footer a{
 </section>
 
 
-<!-- =====================================================
-     FOOTER
-===================================================== -->
-
 <footer>
 
   <div class="container">
@@ -2492,9 +2418,7 @@ footer a{
 
       <div>
 
-        <h4>
-          Navigation
-        </h4>
+        <h4>Navigation</h4>
 
         <a href="#services">Visa Services</a>
         <a href="#process">How It Works</a>
@@ -2506,15 +2430,9 @@ footer a{
 
       <div>
 
-        <h4>
-          Contact
-        </h4>
+        <h4>Contact</h4>
 
-        <a
-          href="https://wa.me/12494771916"
-          target="_blank"
-          rel="noopener"
-        >
+        <a href="https://wa.me/12494771916" target="_blank">
           WhatsApp
         </a>
 
@@ -2545,11 +2463,11 @@ footer a{
 </footer>
 
 
-<!-- =====================================================
-     LIBRARIES
-===================================================== -->
+<!-- SUPABASE -->
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<!-- jsPDF -->
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
@@ -2583,6 +2501,16 @@ let lastSubmittedApplication = null;
 
 let lastCheckedApplication = null;
 
+/*
+ IMPORTANT:
+ Photo is NEVER sent to Supabase.
+ It stays in browser memory as a Data URL.
+*/
+
+let passportPhotoDataURL = '';
+
+let passportPhotoType = 'JPEG';
+
 
 /* =========================================================
    MOBILE MENU
@@ -2593,6 +2521,7 @@ const menuBtn =
 
 const navLinks =
   document.getElementById('navLinks');
+
 
 menuBtn.addEventListener('click',()=>{
 
@@ -2611,8 +2540,7 @@ menuBtn.addEventListener('click',()=>{
     navLinks.style.padding = '18px';
     navLinks.style.flexDirection = 'column';
     navLinks.style.background = '#091a33';
-    navLinks.style.border =
-      '1px solid rgba(255,255,255,.1)';
+    navLinks.style.border = '1px solid rgba(255,255,255,.1)';
     navLinks.style.borderRadius = '15px';
 
   }
@@ -2631,11 +2559,11 @@ function populateDays(id){
 
   for(let i=1;i<=31;i++){
 
-    const value =
+    const v =
       String(i).padStart(2,'0');
 
     el.add(
-      new Option(value,value)
+      new Option(v,v)
     );
 
   }
@@ -2729,6 +2657,120 @@ function selectVisa(country,visa){
 
 
 /* =========================================================
+   PHOTO UPLOAD
+========================================================= */
+
+function handlePhotoUpload(event){
+
+  const file =
+    event.target.files[0];
+
+  const preview =
+    document.getElementById('photoPreview');
+
+  const placeholder =
+    document.getElementById('photoPlaceholder');
+
+  const status =
+    document.getElementById('photoStatus');
+
+
+  if(!file){
+
+    passportPhotoDataURL = '';
+
+    preview.style.display = 'none';
+
+    placeholder.style.display = 'block';
+
+    status.style.display = 'none';
+
+    return;
+
+  }
+
+
+  const allowedTypes = [
+    'image/jpeg',
+    'image/png'
+  ];
+
+
+  if(!allowedTypes.includes(file.type)){
+
+    alert(
+      'Please upload a JPG or PNG image.'
+    );
+
+    event.target.value = '';
+
+    return;
+
+  }
+
+
+  /*
+    5 MB maximum
+  */
+
+  if(file.size > 5 * 1024 * 1024){
+
+    alert(
+      'Photo size must be less than 5 MB.'
+    );
+
+    event.target.value = '';
+
+    return;
+
+  }
+
+
+  const reader =
+    new FileReader();
+
+
+  reader.onload = function(e){
+
+    passportPhotoDataURL =
+      e.target.result;
+
+    passportPhotoType =
+      file.type === 'image/png'
+        ? 'PNG'
+        : 'JPEG';
+
+
+    preview.src =
+      passportPhotoDataURL;
+
+    preview.style.display =
+      'block';
+
+    placeholder.style.display =
+      'none';
+
+    status.style.display =
+      'block';
+
+  };
+
+
+  reader.onerror = function(){
+
+    alert(
+      'Unable to read the selected photo.'
+    );
+
+  };
+
+
+  reader.readAsDataURL(file);
+
+}
+
+
+/* =========================================================
    FORM VALIDATION
 ========================================================= */
 
@@ -2759,6 +2801,30 @@ function validateCurrentStep(){
     }
 
   }
+
+
+  /*
+    Extra photo validation
+  */
+
+  if(currentStep === 2){
+
+    if(!passportPhotoDataURL){
+
+      alert(
+        'Please upload your passport-size photo before continuing.'
+      );
+
+      document
+        .getElementById('passportPhoto')
+        .focus();
+
+      return false;
+
+    }
+
+  }
+
 
   return true;
 
@@ -2842,7 +2908,9 @@ function value(id){
   const el =
     document.getElementById(id);
 
-  return el ? el.value.trim() : '';
+  return el
+    ? el.value.trim()
+    : '';
 
 }
 
@@ -2867,14 +2935,55 @@ function buildReview(){
   const review =
     document.getElementById('reviewBox');
 
+
+  let photoHTML = '';
+
+
+  if(passportPhotoDataURL){
+
+    photoHTML = `
+
+      <div class="review-photo-row">
+
+        <img
+          src="${passportPhotoDataURL}"
+          class="review-photo"
+          alt="Passport Photo"
+        >
+
+        <div>
+
+          <strong>
+            Passport Photo
+          </strong>
+
+          <div class="review-photo-label">
+            ✓ Photo will be included in the PDF
+          </div>
+
+        </div>
+
+      </div>
+
+    `;
+
+  }
+
+
   const rows = [
 
     ['Country',value('country')],
+
     ['Visa Type',value('visa')],
+
     ['Name',
-      value('firstName')+' '+value('lastName')
+      value('firstName') +
+      ' ' +
+      value('lastName')
     ],
+
     ['Nationality',value('nationality')],
+
     ['Date of Birth',
       buildDate(
         'dobDay',
@@ -2882,7 +2991,9 @@ function buildReview(){
         'dobYear'
       )
     ],
+
     ['Passport Number',value('passport')],
+
     ['Passport Issue',
       buildDate(
         'issueDay',
@@ -2890,6 +3001,7 @@ function buildReview(){
         'issueYear'
       )
     ],
+
     ['Passport Expiry',
       buildDate(
         'expiryDay',
@@ -2897,14 +3009,19 @@ function buildReview(){
         'expiryYear'
       )
     ],
+
     ['Phone',value('phone')],
+
     ['Email',value('email')],
+
     ['Address',value('address')]
 
   ];
 
 
   review.innerHTML =
+    photoHTML +
+
     rows.map(row=>`
 
       <div class="review-row">
@@ -2962,14 +3079,32 @@ async function submitApplication(event){
 
   event.preventDefault();
 
+
   if(currentStep !== 4){
+
     return;
+
   }
+
+
+  if(!passportPhotoDataURL){
+
+    alert(
+      'Passport photo is required.'
+    );
+
+    showStep(2);
+
+    return;
+
+  }
+
 
   const button =
     document.getElementById(
       'submitButton'
     );
+
 
   button.disabled = true;
 
@@ -2980,6 +3115,12 @@ async function submitApplication(event){
   const applicationNumber =
     generateApplicationNumber();
 
+
+  /*
+    IMPORTANT:
+    No photo field is included here.
+    Therefore the photo is NOT saved to Supabase.
+  */
 
   const application = {
 
@@ -3110,8 +3251,20 @@ async function submitApplication(event){
       currentAddress:
         application.current_address,
 
+      phone:
+        application.phone,
+
+      email:
+        application.email,
+
       status:
-        application.status
+        application.status,
+
+      photo:
+        passportPhotoDataURL,
+
+      photoType:
+        passportPhotoType
 
     };
 
@@ -3140,31 +3293,29 @@ async function submitApplication(event){
       'none';
 
 
-    /* =====================================================
-       AUTO PDF
-    ===================================================== */
+    /*
+      AUTO PDF DOWNLOAD
+    */
 
-    try{
+    setTimeout(()=>{
 
-      generateApplicationPDF(
-        lastSubmittedApplication
-      );
+      try{
 
-    }catch(pdfError){
+        generateApplicationPDF(
+          lastSubmittedApplication
+        );
 
-      console.error(
-        'PDF Error:',
-        pdfError
-      );
+      }catch(pdfError){
 
-    }
+        console.error(pdfError);
 
+        alert(
+          'Application submitted, but PDF generation failed. Please use Download PDF Again.'
+        );
 
-    alert(
-      'Application submitted successfully!\n\n' +
-      'Application Number: ' +
-      applicationNumber
-    );
+      }
+
+    },300);
 
 
     document
@@ -3187,7 +3338,7 @@ async function submitApplication(event){
     button.disabled = false;
 
     button.textContent =
-      'Submit Application →';
+      'Submit & Download PDF →';
 
   }
 
@@ -3323,17 +3474,11 @@ async function checkApplicationStatus(){
       dateOfBirth:
         application.date_of_birth || '',
 
-      applicationDate:
-        '',
+      applicationDate:'',
 
-      passportIssueDate:
-        application.passport_issue_date || '',
+      currentAddress:'',
 
-      passportExpiryDate:
-        application.passport_expiry_date || '',
-
-      currentAddress:
-        application.current_address || ''
+      photo:''
 
     };
 
@@ -3347,9 +3492,7 @@ async function checkApplicationStatus(){
           <div>
 
             <div class="status-name">
-              ${escapeHTML(
-                applicantName || 'Applicant'
-              )}
+              ${escapeHTML(applicantName || 'Applicant')}
             </div>
 
             <div class="status-number">
@@ -3372,14 +3515,10 @@ async function checkApplicationStatus(){
 
           <div class="status-info">
 
-            <small>
-              Country
-            </small>
+            <small>Country</small>
 
             <strong>
-              ${escapeHTML(
-                application.country || '-'
-              )}
+              ${escapeHTML(application.country || '-')}
             </strong>
 
           </div>
@@ -3387,14 +3526,10 @@ async function checkApplicationStatus(){
 
           <div class="status-info">
 
-            <small>
-              Visa Type
-            </small>
+            <small>Visa Type</small>
 
             <strong>
-              ${escapeHTML(
-                application.visa_type || '-'
-              )}
+              ${escapeHTML(application.visa_type || '-')}
             </strong>
 
           </div>
@@ -3402,14 +3537,10 @@ async function checkApplicationStatus(){
 
           <div class="status-info">
 
-            <small>
-              Passport
-            </small>
+            <small>Passport</small>
 
             <strong>
-              ${escapeHTML(
-                application.passport_number || '-'
-              )}
+              ${escapeHTML(application.passport_number || '-')}
             </strong>
 
           </div>
@@ -3417,9 +3548,7 @@ async function checkApplicationStatus(){
 
           <div class="status-info">
 
-            <small>
-              Status
-            </small>
+            <small>Status</small>
 
             <strong>
               ${escapeHTML(status)}
@@ -3486,20 +3615,29 @@ function buildTimeline(status){
 
 
   const normalized =
-    String(status)
-      .toLowerCase();
+    String(status).toLowerCase();
 
 
   let activeIndex = 0;
 
 
-  if(normalized.includes('review')){
+  if(
+    normalized.includes('review')
+  ){
+
     activeIndex = 1;
+
   }
 
-  if(normalized.includes('process')){
+
+  if(
+    normalized.includes('process')
+  ){
+
     activeIndex = 2;
+
   }
+
 
   if(
     normalized.includes('complete') ||
@@ -3548,10 +3686,42 @@ function buildTimeline(status){
 
 
 /* =========================================================
-   PREMIUM PDF
+   IMAGE LOADER FOR PDF
 ========================================================= */
 
-function generateApplicationPDF(application){
+function loadImage(dataURL){
+
+  return new Promise(
+    (resolve,reject)=>{
+
+      const img =
+        new Image();
+
+      img.onload = ()=>{
+        resolve(img);
+      };
+
+      img.onerror = ()=>{
+        reject(
+          new Error(
+            'Unable to load passport photo'
+          )
+        );
+      };
+
+      img.src = dataURL;
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   PDF GENERATOR
+========================================================= */
+
+async function generateApplicationPDF(application){
 
   if(
     !window.jspdf ||
@@ -3573,38 +3743,51 @@ function generateApplicationPDF(application){
 
   const doc =
     new jsPDF({
-      orientation:'portrait',
       unit:'mm',
       format:'a4'
     });
 
 
+  const navy =
+    [6,18,37];
+
+  const navy2 =
+    [9,26,51];
+
+  const blue =
+    [37,99,255];
+
+  const gold =
+    [245,201,91];
+
+  const goldLight =
+    [255,224,138];
+
+  const muted =
+    [92,105,124];
+
+  const light =
+    [246,248,252];
+
+  const line =
+    [220,225,232];
+
+
   const W = 210;
+
   const H = 297;
 
-
-  const navy = [6,18,37];
-  const navy2 = [9,26,51];
-  const blue = [37,99,255];
-  const gold = [245,201,91];
-  const goldLight = [255,224,138];
-  const text = [25,35,50];
-  const muted = [105,118,135];
-  const border = [220,225,232];
-  const green = [30,170,105];
-
-
   const left = 18;
+
   const right = 192;
-  const contentWidth = right-left;
 
 
-  /* =====================================================
-     PAGE
-  ===================================================== */
+  /* =======================================================
+     WHITE PAGE
+  ======================================================= */
 
   doc.setFillColor(
-    250,251,253
+    255,255,255
   );
 
   doc.rect(
@@ -3616,9 +3799,9 @@ function generateApplicationPDF(application){
   );
 
 
-  /* =====================================================
+  /* =======================================================
      HEADER
-  ===================================================== */
+  ======================================================= */
 
   doc.setFillColor(
     ...navy
@@ -3628,53 +3811,40 @@ function generateApplicationPDF(application){
     0,
     0,
     W,
-    52,
+    48,
     'F'
   );
 
 
-  /* decorative circles */
+  /* Blue accent */
 
   doc.setFillColor(
     ...blue
   );
 
-  doc.circle(
-    195,
-    8,
-    30,
+  doc.rect(
+    0,
+    0,
+    5,
+    48,
     'F'
   );
 
 
-  doc.setFillColor(
-    ...navy2
-  );
-
-  doc.circle(
-    205,
-    42,
-    35,
-    'F'
-  );
-
-
-  /* gold line */
+  /* Gold accent */
 
   doc.setFillColor(
     ...gold
   );
 
   doc.rect(
-    0,
-    49,
-    W,
+    5,
+    45,
+    205,
     3,
     'F'
   );
 
-
-  /* brand */
 
   doc.setTextColor(
     255,255,255
@@ -3688,31 +3858,9 @@ function generateApplicationPDF(application){
   doc.setFontSize(17);
 
   doc.text(
-    'CANADA',
+    'CANADA & AUSTRALIA',
     left,
-    18
-  );
-
-
-  doc.setTextColor(
-    ...gold
-  );
-
-  doc.text(
-    '&',
-    49,
-    18
-  );
-
-
-  doc.setTextColor(
-    255,255,255
-  );
-
-  doc.text(
-    'AUSTRALIA',
-    57,
-    18
+    17
   );
 
 
@@ -3721,16 +3869,16 @@ function generateApplicationPDF(application){
     'normal'
   );
 
-  doc.setFontSize(8);
+  doc.setFontSize(8.5);
 
   doc.setTextColor(
-    190,205,225
+    195,207,225
   );
 
   doc.text(
     'VISA APPLICATION & ASSISTANCE',
     left,
-    27
+    25
   );
 
 
@@ -3748,16 +3896,127 @@ function generateApplicationPDF(application){
   doc.text(
     'PRIVATE APPLICATION CONFIRMATION',
     left,
-    38
+    35
   );
 
 
-  /* =====================================================
+  /* =======================================================
+     PHOTO
+  ======================================================= */
+
+  const photoX = 160;
+
+  const photoY = 8;
+
+  const photoW = 30;
+
+  const photoH = 36;
+
+
+  doc.setFillColor(
+    255,255,255
+  );
+
+  doc.roundedRect(
+    photoX - 1,
+    photoY - 1,
+    photoW + 2,
+    photoH + 2,
+    2,
+    2,
+    'F'
+  );
+
+
+  if(application.photo){
+
+    try{
+
+      const img =
+        await loadImage(
+          application.photo
+        );
+
+
+      doc.addImage(
+        img,
+        application.photoType || 'JPEG',
+        photoX,
+        photoY,
+        photoW,
+        photoH,
+        undefined,
+        'FAST'
+      );
+
+
+    }catch(error){
+
+      console.error(
+        'Photo PDF error:',
+        error
+      );
+
+      doc.setFillColor(
+        235,238,243
+      );
+
+      doc.rect(
+        photoX,
+        photoY,
+        photoW,
+        photoH,
+        'F'
+      );
+
+      doc.setTextColor(
+        ...muted
+      );
+
+      doc.setFontSize(6);
+
+      doc.text(
+        'PHOTO',
+        photoX + 15,
+        photoY + 19,
+        {align:'center'}
+      );
+
+    }
+
+  }else{
+
+    doc.setFillColor(
+      235,238,243
+    );
+
+    doc.rect(
+      photoX,
+      photoY,
+      photoW,
+      photoH,
+      'F'
+    );
+
+    doc.setTextColor(
+      ...muted
+    );
+
+    doc.setFontSize(6);
+
+    doc.text(
+      'PHOTO',
+      photoX + 15,
+      photoY + 19,
+      {align:'center'}
+    );
+
+  }
+
+
+  /* =======================================================
      TITLE
-  ===================================================== */
-
-  let y = 67;
-
+  ======================================================= */
 
   doc.setTextColor(
     ...navy
@@ -3768,16 +4027,13 @@ function generateApplicationPDF(application){
     'bold'
   );
 
-  doc.setFontSize(21);
+  doc.setFontSize(17);
 
   doc.text(
     'Application Confirmation',
     left,
-    y
+    64
   );
-
-
-  y += 7;
 
 
   doc.setFont(
@@ -3792,43 +4048,44 @@ function generateApplicationPDF(application){
   );
 
   doc.text(
-    'Thank you for submitting your application request.',
+    application.applicationDate || '',
     left,
-    y
+    71
   );
 
 
-  /* =====================================================
-     APPLICATION NUMBER
-  ===================================================== */
-
-  y = 82;
-
+  /* =======================================================
+     APPLICATION NUMBER BOX
+  ======================================================= */
 
   doc.setFillColor(
-    ...navy
+    ...light
+  );
+
+  doc.setDrawColor(
+    230,234,240
   );
 
   doc.roundedRect(
     left,
-    y,
-    contentWidth,
-    31,
-    5,
-    5,
-    'F'
+    80,
+    174,
+    28,
+    3,
+    3,
+    'FD'
   );
 
 
   doc.setFillColor(
-    ...gold
+    ...blue
   );
 
   doc.roundedRect(
     left,
-    y,
-    4,
-    31,
+    80,
+    5,
+    28,
     2,
     2,
     'F'
@@ -3836,7 +4093,7 @@ function generateApplicationPDF(application){
 
 
   doc.setTextColor(
-    180,195,215
+    ...muted
   );
 
   doc.setFont(
@@ -3848,119 +4105,29 @@ function generateApplicationPDF(application){
 
   doc.text(
     'APPLICATION NUMBER',
-    left+11,
-    y+10
+    28,
+    90
   );
 
 
   doc.setTextColor(
-    255,255,255
+    ...navy
   );
 
-  doc.setFont(
-    'helvetica',
-    'bold'
-  );
-
-  doc.setFontSize(17);
+  doc.setFontSize(15);
 
   doc.text(
-    application.applicationNumber || '-',
-    left+11,
-    y+21
+    application.applicationNumber || '',
+    28,
+    100
   );
 
 
-  /* status */
+  /* =======================================================
+     APPLICANT INFORMATION TITLE
+  ======================================================= */
 
-  const status =
-    application.status || 'New';
-
-
-  doc.setFillColor(
-    ...green
-  );
-
-  doc.roundedRect(
-    151,
-    y+9,
-    30,
-    10,
-    5,
-    5,
-    'F'
-  );
-
-
-  doc.setTextColor(
-    255,255,255
-  );
-
-  doc.setFont(
-    'helvetica',
-    'bold'
-  );
-
-  doc.setFontSize(6.5);
-
-  doc.text(
-    status.toUpperCase(),
-    166,
-    y+15.5,
-    {
-      align:'center'
-    }
-  );
-
-
-  /* =====================================================
-     DATE
-  ===================================================== */
-
-  y = 126;
-
-
-  doc.setFont(
-    'helvetica',
-    'normal'
-  );
-
-  doc.setFontSize(8);
-
-  doc.setTextColor(
-    ...muted
-  );
-
-  doc.text(
-    'APPLICATION DATE',
-    left,
-    y
-  );
-
-
-  doc.setTextColor(
-    ...text
-  );
-
-  doc.setFont(
-    'helvetica',
-    'bold'
-  );
-
-  doc.setFontSize(9);
-
-  doc.text(
-    application.applicationDate || '-',
-    left,
-    y+6
-  );
-
-
-  /* =====================================================
-     SECTION TITLE
-  ===================================================== */
-
-  y = 146;
+  let y = 120;
 
 
   doc.setTextColor(
@@ -3972,7 +4139,7 @@ function generateApplicationPDF(application){
     'bold'
   );
 
-  doc.setFontSize(13);
+  doc.setFontSize(11);
 
   doc.text(
     'Applicant Information',
@@ -3981,114 +4148,82 @@ function generateApplicationPDF(application){
   );
 
 
-  doc.setFillColor(
+  doc.setDrawColor(
     ...gold
   );
 
-  doc.roundedRect(
+  doc.setLineWidth(.8);
+
+  doc.line(
     left,
-    y+4,
-    24,
-    1.5,
-    .7,
-    .7,
-    'F'
+    y + 4,
+    left + 35,
+    y + 4
   );
 
 
-  /* =====================================================
-     INFORMATION CARDS
-  ===================================================== */
+  y += 13;
 
-  y += 15;
 
+  /* =======================================================
+     INFORMATION ROWS
+  ======================================================= */
 
   const rows = [
 
-    [
-      'Applicant Name',
-      application.applicantName
-    ],
+    ['Applicant',
+      application.applicantName],
 
-    [
-      'Country',
-      application.country
-    ],
+    ['Country',
+      application.country],
 
-    [
-      'Visa / Application Type',
-      application.visaType
-    ],
+    ['Visa Type',
+      application.visaType],
 
-    [
-      'Nationality',
-      application.nationality
-    ],
+    ['Nationality',
+      application.nationality],
 
-    [
-      'Date of Birth',
-      application.dateOfBirth
-    ],
+    ['Date of Birth',
+      application.dateOfBirth],
 
-    [
-      'Passport Number',
-      application.passportNumber
-    ],
+    ['Passport Number',
+      application.passportNumber],
 
-    [
-      'Passport Issue Date',
-      application.passportIssueDate
-    ],
+    ['Passport Issue Date',
+      application.passportIssueDate],
 
-    [
-      'Passport Expiry Date',
-      application.passportExpiryDate
-    ]
+    ['Passport Expiry Date',
+      application.passportExpiryDate],
+
+    ['Phone',
+      application.phone],
+
+    ['Email',
+      application.email],
+
+    ['Current Status',
+      application.status]
 
   ];
 
 
-  const boxHeight = 15;
-  const gap = 5;
-
-
   rows.forEach((row,index)=>{
 
-    const col =
-      index % 2;
+    if(index % 2 === 0){
 
-    const rowIndex =
-      Math.floor(index / 2);
-
-    const x =
-      left +
-      col * (84 + gap);
-
-    const yy =
-      y +
-      rowIndex * (
-        boxHeight + gap
+      doc.setFillColor(
+        249,250,252
       );
 
+      doc.rect(
+        left,
+        y - 5,
+        174,
+        9,
+        'F'
+      );
 
-    doc.setFillColor(
-      255,255,255
-    );
-
-    doc.setDrawColor(
-      ...border
-    );
-
-
-    doc.roundedRect(
-      x,
-      yy,
-      84,
-      boxHeight,
-      3,
-      3,
-      'FD'
-    );
+    }
 
 
     doc.setTextColor(
@@ -4097,77 +4232,207 @@ function generateApplicationPDF(application){
 
     doc.setFont(
       'helvetica',
-      'normal'
+      'bold'
     );
 
-    doc.setFontSize(6.5);
-
+    doc.setFontSize(7.5);
 
     doc.text(
-      row[0].toUpperCase(),
-      x+6,
-      yy+6
+      row[0],
+      left + 3,
+      y
     );
 
 
     doc.setTextColor(
-      ...text
+      ...navy
     );
 
     doc.setFont(
       'helvetica',
-      'bold'
+      'normal'
     );
 
     doc.setFontSize(8);
 
-
-    const displayValue =
+    const text =
       String(row[1] || '-');
 
 
-    const lines =
+    const maxWidth = 100;
+
+
+    const wrapped =
       doc.splitTextToSize(
-        displayValue,
-        72
+        text,
+        maxWidth
       );
 
 
     doc.text(
-      lines[0],
-      x+6,
-      yy+11
+      wrapped,
+      82,
+      y
     );
+
+
+    doc.setDrawColor(
+      ...line
+    );
+
+    doc.setLineWidth(.2);
+
+    doc.line(
+      left,
+      y + 4,
+      right,
+      y + 4
+    );
+
+
+    y +=
+      wrapped.length > 1
+        ? 11
+        : 8;
 
   });
 
 
-  /* =====================================================
-     ADDRESS
-  ===================================================== */
+  /* =======================================================
+     PHOTO INCLUDED BADGE
+  ======================================================= */
 
-  y +=
-    4 * (boxHeight + gap) +
-    3;
+  y += 5;
 
 
   doc.setFillColor(
-    255,255,255
+    235,250,244
   );
 
   doc.setDrawColor(
-    ...border
+    194,236,216
   );
-
 
   doc.roundedRect(
     left,
     y,
-    contentWidth,
-    23,
+    174,
+    13,
     3,
     3,
     'FD'
+  );
+
+
+  doc.setTextColor(
+    24,130,86
+  );
+
+  doc.setFont(
+    'helvetica',
+    'bold'
+  );
+
+  doc.setFontSize(7.5);
+
+  doc.text(
+    application.photo
+      ? '✓ PASSPORT PHOTO INCLUDED IN THIS PDF'
+      : 'PASSPORT PHOTO NOT AVAILABLE',
+    left + 7,
+    y + 8
+  );
+
+
+  /* =======================================================
+     NOTICE
+  ======================================================= */
+
+  y += 21;
+
+
+  doc.setFillColor(
+    248,249,252
+  );
+
+  doc.setDrawColor(
+    225,229,235
+  );
+
+  doc.roundedRect(
+    left,
+    y,
+    174,
+    35,
+    3,
+    3,
+    'FD'
+  );
+
+
+  doc.setTextColor(
+    ...navy
+  );
+
+  doc.setFont(
+    'helvetica',
+    'bold'
+  );
+
+  doc.setFontSize(8.5);
+
+  doc.text(
+    'Important Information',
+    left + 7,
+    y + 9
+  );
+
+
+  doc.setTextColor(
+    ...muted
+  );
+
+  doc.setFont(
+    'helvetica',
+    'normal'
+  );
+
+  doc.setFontSize(6.8);
+
+
+  const notice =
+    'This document confirms receipt of an application or assistance request submitted through CANADA & AUSTRALIA Visa Application & Assistance. This is an independent private service document and is not issued by a government immigration authority. Visa and immigration decisions are made by the relevant government authority.';
+
+
+  const noticeLines =
+    doc.splitTextToSize(
+      notice,
+      158
+    );
+
+
+  doc.text(
+    noticeLines,
+    left + 7,
+    y + 17
+  );
+
+
+  /* =======================================================
+     FOOTER
+  ======================================================= */
+
+  doc.setDrawColor(
+    210,215,222
+  );
+
+  doc.setLineWidth(.3);
+
+  doc.line(
+    left,
+    276,
+    right,
+    276
   );
 
 
@@ -4182,172 +4447,17 @@ function generateApplicationPDF(application){
 
   doc.setFontSize(6.5);
 
-
   doc.text(
-    'CURRENT ADDRESS',
-    left+6,
-    y+7
-  );
-
-
-  doc.setTextColor(
-    ...text
-  );
-
-  doc.setFont(
-    'helvetica',
-    'normal'
-  );
-
-  doc.setFontSize(8);
-
-
-  const addressLines =
-    doc.splitTextToSize(
-      String(
-        application.currentAddress ||
-        '-'
-      ),
-      contentWidth-12
-    );
-
-
-  doc.text(
-    addressLines.slice(0,2),
-    left+6,
-    y+14
-  );
-
-
-  /* =====================================================
-     IMPORTANT NOTICE
-  ===================================================== */
-
-  y += 34;
-
-
-  doc.setFillColor(
-    255,
-    248,
-    226
-  );
-
-  doc.setDrawColor(
-    ...gold
-  );
-
-
-  doc.roundedRect(
+    'PRIVATE SERVICE DOCUMENT — NOT GOVERNMENT ISSUED',
     left,
-    y,
-    contentWidth,
-    42,
-    4,
-    4,
-    'FD'
-  );
-
-
-  doc.setTextColor(
-    ...navy
-  );
-
-  doc.setFont(
-    'helvetica',
-    'bold'
-  );
-
-  doc.setFontSize(9);
-
-
-  doc.text(
-    'Important Information',
-    left+7,
-    y+10
-  );
-
-
-  doc.setTextColor(
-    82,
-    91,
-    105
-  );
-
-  doc.setFont(
-    'helvetica',
-    'normal'
-  );
-
-  doc.setFontSize(7);
-
-
-  const notice =
-    'This document confirms receipt of an application or assistance request submitted through CANADA & AUSTRALIA Visa Application & Assistance. This is an independent private service and is not issued by a government immigration authority. Visa or immigration decisions are made solely by the relevant government authority. Submission of this application does not guarantee visa approval.';
-
-
-  const noticeLines =
-    doc.splitTextToSize(
-      notice,
-      contentWidth-14
-    );
-
-
-  doc.text(
-    noticeLines,
-    left+7,
-    y+19
-  );
-
-
-  /* =====================================================
-     FOOTER
-  ===================================================== */
-
-  doc.setDrawColor(
-    ...border
-  );
-
-  doc.line(
-    left,
-    273,
-    right,
-    273
-  );
-
-
-  doc.setFont(
-    'helvetica',
-    'bold'
-  );
-
-  doc.setFontSize(6.5);
-
-  doc.setTextColor(
-    ...navy
+    284
   );
 
 
   doc.text(
     'CANADA & AUSTRALIA',
     left,
-    282
-  );
-
-
-  doc.setFont(
-    'helvetica',
-    'normal'
-  );
-
-  doc.setTextColor(
-    ...muted
-  );
-
-
-  doc.text(
-    'Independent Visa Application & Assistance',
-    left,
-    288
+    290
   );
 
 
@@ -4357,45 +4467,22 @@ function generateApplicationPDF(application){
   );
 
   doc.setTextColor(
-    ...gold
+    ...navy
   );
-
 
   doc.text(
     application.applicationNumber || '',
     right,
-    282,
+    290,
     {
       align:'right'
     }
   );
 
 
-  doc.setFont(
-    'helvetica',
-    'normal'
-  );
-
-  doc.setFontSize(6);
-
-  doc.setTextColor(
-    ...muted
-  );
-
-
-  doc.text(
-    'PRIVATE SERVICE DOCUMENT — NOT GOVERNMENT ISSUED',
-    right,
-    288,
-    {
-      align:'right'
-    }
-  );
-
-
-  /* =====================================================
-     SAVE PDF AUTOMATICALLY
-  ===================================================== */
+  /* =======================================================
+     SAVE PDF
+  ======================================================= */
 
   const safe =
     String(
@@ -4430,6 +4517,11 @@ function downloadCheckedApplicationPDF(){
 
   }
 
+
+  /*
+    Tracking data cannot retrieve the photo because
+    photo is intentionally NOT stored in Supabase.
+  */
 
   generateApplicationPDF(
     lastCheckedApplication

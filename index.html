@@ -455,6 +455,154 @@ section{
   font-weight:900;
 }
 
+/* LEADERSHIP */
+
+.leadership-section{
+  position:relative;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 15% 30%,rgba(37,99,255,.07),transparent 32%),
+    radial-gradient(circle at 85% 70%,rgba(245,201,91,.055),transparent 30%);
+}
+
+.leadership-card{
+  display:grid;
+  grid-template-columns:360px 1fr;
+  gap:45px;
+  align-items:center;
+  max-width:980px;
+  margin:auto;
+  padding:30px;
+  border:1px solid var(--line);
+  border-radius:30px;
+  background:linear-gradient(145deg,rgba(255,255,255,.065),rgba(255,255,255,.025));
+  box-shadow:var(--shadow);
+  overflow:hidden;
+}
+
+.leader-photo-wrap{
+  position:relative;
+  min-height:390px;
+  border-radius:24px;
+  overflow:hidden;
+  border:1px solid rgba(245,201,91,.25);
+  background:#07162b;
+}
+
+.leader-photo-wrap:before{
+  content:"";
+  position:absolute;
+  width:220px;
+  height:220px;
+  right:-80px;
+  top:-80px;
+  border-radius:50%;
+  background:var(--blue);
+  filter:blur(75px);
+  opacity:.22;
+}
+
+.leader-photo{
+  position:relative;
+  z-index:1;
+  width:100%;
+  height:100%;
+  min-height:390px;
+  object-fit:cover;
+  object-position:center;
+  display:block;
+}
+
+.leader-content .eyebrow{
+  margin-bottom:8px;
+}
+
+.leader-content h3{
+  font-size:clamp(30px,4vw,46px);
+  line-height:1.05;
+  letter-spacing:-1.5px;
+  margin:7px 0 8px;
+}
+
+.leader-role{
+  color:var(--gold);
+  font-size:15px;
+  font-weight:850;
+  margin-bottom:18px;
+}
+
+.leader-content p{
+  color:var(--muted);
+  font-size:14px;
+  max-width:620px;
+  margin-bottom:18px;
+}
+
+.leader-details{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin:22px 0;
+}
+
+.leader-detail{
+  padding:13px 14px;
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:rgba(255,255,255,.035);
+}
+
+.leader-detail small{
+  display:block;
+  color:var(--muted);
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  margin-bottom:3px;
+}
+
+.leader-detail strong{
+  font-size:13px;
+}
+
+.leader-quote{
+  padding:15px 17px;
+  border-left:3px solid var(--gold);
+  border-radius:0 13px 13px 0;
+  background:rgba(245,201,91,.045);
+  color:#d9e3f2;
+  font-size:13px;
+  margin-bottom:22px;
+}
+
+@media(max-width:950px){
+  .leadership-card{
+    grid-template-columns:1fr;
+    max-width:680px;
+  }
+
+  .leader-photo-wrap,
+  .leader-photo{
+    min-height:420px;
+  }
+}
+
+@media(max-width:650px){
+  .leadership-card{
+    padding:18px;
+    gap:25px;
+  }
+
+  .leader-photo-wrap,
+  .leader-photo{
+    min-height:360px;
+  }
+
+  .leader-details{
+    grid-template-columns:1fr;
+  }
+}
+
 /* PROCESS */
 
 .process-grid{
@@ -1234,6 +1382,7 @@ footer a{
     <nav class="nav-links" id="navLinks">
       <a href="#services">Visa Services</a>
       <a href="#process">Process</a>
+      <a href="#leadership">Director</a>
       <a href="#tracking">Track</a>
       <a href="#faq">FAQ</a>
       <a href="#apply">Apply</a>
@@ -1493,6 +1642,96 @@ footer a{
             Start Application →
           </a>
         </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<section id="leadership" class="leadership-section">
+
+  <div class="container">
+
+    <div class="section-head">
+
+      <div class="eyebrow">
+        Our Leadership
+      </div>
+
+      <h2>Meet Our Director</h2>
+
+      <p>
+        Professional guidance and application assistance for
+        Canada and Australia.
+      </p>
+
+    </div>
+
+    <div class="leadership-card">
+
+      <div class="leader-photo-wrap">
+        <img
+          src="assets/md-faruk-khan.png"
+          alt="MD Faruk Khan"
+          class="leader-photo"
+        >
+      </div>
+
+      <div class="leader-content">
+
+        <div class="eyebrow">
+          Canada & Australia
+        </div>
+
+        <h3>MD FARUK KHAN</h3>
+
+        <div class="leader-role">
+          Co-Founder & Director
+        </div>
+
+        <p>
+          MD Faruk Khan is part of the leadership team of
+          Canada & Australia Visa Application Assistance,
+          supporting applicants with organized application
+          intake, document guidance and next-step assistance.
+        </p>
+
+        <div class="leader-details">
+
+          <div class="leader-detail">
+            <small>Role</small>
+            <strong>Co-Founder & Director</strong>
+          </div>
+
+          <div class="leader-detail">
+            <small>Service</small>
+            <strong>Visa Application Assistance</strong>
+          </div>
+
+          <div class="leader-detail">
+            <small>Destinations</small>
+            <strong>Canada & Australia</strong>
+          </div>
+
+          <div class="leader-detail">
+            <small>Support</small>
+            <strong>Application Guidance</strong>
+          </div>
+
+        </div>
+
+        <div class="leader-quote">
+          “Our goal is to keep the application process organized,
+          clear and easy to understand for every applicant.”
+        </div>
+
+        <a href="#apply" class="btn gold">
+          Start Application →
+        </a>
 
       </div>
 
